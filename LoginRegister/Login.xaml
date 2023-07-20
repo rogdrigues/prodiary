@@ -1,0 +1,64 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProDiaryApplication"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="ProDiaryApplication.Login"
+        mc:Ignorable="d"
+        Title="PiligonDiary" Height="664" Width="1435" Icon="/Resource/Image/iconImage.jpg" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" Closed="Window_Closed">
+    <Window.Background>
+        <ImageBrush ImageSource="/Resource/Theme/Afternoon_in_a_Sunset01.gif"/>
+    </Window.Background>
+    <Window.Resources>
+        <ControlTemplate x:Key="NoMouseOverButtonTemplate"   
+                 TargetType="Button">
+            <Border Background="{TemplateBinding Background}"  
+          BorderBrush="{TemplateBinding BorderBrush}"  
+          BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  
+                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"  
+             Value="False">
+                    <Setter Property="Background"  
+              Value="{x:Static SystemColors.ControlLightBrush}" />
+                    <Setter Property="Foreground"  
+              Value="{x:Static SystemColors.GrayTextBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+        <DockPanel LastChildFill="False">
+            <DockPanel.Background>
+                <ImageBrush/>
+            </DockPanel.Background>
+            <Canvas Width="1438" Background="#33000000">
+                <Label Content="Piligon C." HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="19" FontFamily="Script MT Bold" Foreground="#FFEFEFEF" FontSize="72" Width="1434" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Content="Embrace the art of writing, let your ideas take flight" Canvas.Top="121" FontFamily="Script MT Bold" Foreground="#FFEFEFEF" FontSize="24" Width="1434" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="2"/>
+                <Grid HorizontalAlignment="Left" Height="124" Canvas.Left="401" Canvas.Top="188" VerticalAlignment="Top" Width="559">
+                    <TextBox x:Name="txtUser" TextWrapping="Wrap" Width="485" Background="{x:Null}" Foreground="White" FontFamily="Segoe UI Emoji" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" TextAlignment="Center" BorderThickness="0,0,0,3" BorderBrush="#FFF0F0F1" Margin="74,0,0,0"/>
+                    <PasswordBox x:Name="txtPassword" Width="486" Background="{x:Null}" Foreground="White" FontFamily="Segoe UI Emoji" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0,0,0,3" BorderBrush="#FFF0F0F1" UseLayoutRounding="False" HorizontalContentAlignment="Center" FontSize="24" Margin="73,70,0,0"/>
+                    <Image Height="60" Width="59" Source="/Resource/Image/account.png" RenderTransformOrigin="0.861,-0.35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-24,0,0"/>
+                    <Image Height="51" Width="59" Source="/Resource/Image/key.png" RenderTransformOrigin="0.861,-0.35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,63,0,0"/>
+                </Grid>
+                <Border Height="41" Width="334" CornerRadius="5,5,5,5" HorizontalAlignment="Left" Canvas.Top="350" VerticalAlignment="Center" Canvas.Left="552" Background="#B2B39595" Cursor="Hand" >
+                    <Button x:Name="btnLogin" Content="Login" FontFamily="Script MT Bold" FontSize="24" Foreground="White" Background="#00DDDDDD" BorderBrush="#00707070" Click="btnLogin_Click" />
+                </Border>
+                <Grid HorizontalAlignment="Left" Height="56" Canvas.Left="535" Canvas.Top="425" VerticalAlignment="Top" Width="396">
+                    <Label Content="Don't have your account?" FontFamily="Script MT Bold" FontSize="24" Foreground="#FFBBACAC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,11,0,0"/>
+                    <Button x:Name="btnShowRegister" Content="Register" Template="{StaticResource NoMouseOverButtonTemplate}" FontFamily="Script MT Bold" FontSize="36" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="White" BorderThickness="0,0,0,1" Height="56" Cursor="Hand" Margin="267,0,0,0" Background="{x:Null}" Click="btnShowRegister_Click"/>
+                </Grid>
+                <Grid HorizontalAlignment="Left" Height="50" Canvas.Left="544.00000000000011" Canvas.Top="486" VerticalAlignment="Top" Width="348">
+                    <Label Content="Forgot your password?" FontFamily="Script MT Bold" FontSize="24" Foreground="#FFBBACAC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,11,0,0"/>
+                    <Button x:Name="btnShowReset" Content="Reset" Template="{StaticResource NoMouseOverButtonTemplate}" FontFamily="Script MT Bold" FontSize="36" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" Cursor="Hand" Margin="258,0,0,0" Background="{x:Null}" Click="btnShowReset_Click"/>
+                </Grid>
+                <Label Content="Piligon v0.0.1" Canvas.Top="575" FontFamily="Script MT Bold" Foreground="#FFEFEFEF" FontSize="24" Width="1434" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Canvas.Left="10" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </Canvas>
+        </DockPanel>
+
+    </Grid>
+</Window>
