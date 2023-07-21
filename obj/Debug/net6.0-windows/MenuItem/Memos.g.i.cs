@@ -285,7 +285,7 @@ namespace ProDiaryApplication.MenuItem {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;component/menuitem/memos.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;V1.0.0.0;component/menuitem/memos.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MenuItem\Memos.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
