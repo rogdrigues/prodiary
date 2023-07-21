@@ -9,6 +9,13 @@
     <Window.Background>
         <ImageBrush x:Name="windowBG" ImageSource="/Resource/Theme/Diary_in_the_night03.jpg"/>
     </Window.Background>
+    <Window.Resources>
+        <Style TargetType="RichTextBox" x:Key="CustomRichTextBoxStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <DockPanel LastChildFill="True" Height="564" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1280">
             <StackPanel x:Name="sidebar_panel" Width="230">
@@ -231,65 +238,65 @@
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Border BorderThickness="0,0,0.5,0" BorderBrush="#FFFDEEEE" Margin="0,0,5,0" Width="120">
                                     <Grid Height="26" Width="98">
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,68,0" >
+                                        <Button x:Name="btnUndo" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,68,0" Click="btnWordAction" >
                                             <Image Height="22" Width="21" Source="/Resource/Icon/undo.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="34,0,34,0" >
+                                        <Button x:Name="btnRedo" Background="{x:Null}" BorderBrush="{x:Null}" Margin="34,0,34,0" Click="btnWordAction" >
                                             <Image Height="22" Width="21" Source="/Resource/Icon/forward.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="68,0,0,0" >
+                                        <Button x:Name="btnImportImage" Background="{x:Null}" BorderBrush="{x:Null}" Margin="68,0,0,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/image.png"/>
                                         </Button>
                                     </Grid>
                                 </Border>
                                 <Border BorderThickness="0,0,0.5,0" BorderBrush="#FFFDEEEE" Margin="0,0,5,-2" Width="128">
                                     <Grid Height="26" Width="112">
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,87,0" >
+                                        <Button x:Name="btnAlignLeft" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,87,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/align-left.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,58,0" >
+                                        <Button x:Name="btnAlignJustify" Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,58,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/justification.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="58,0,29,0" >
+                                        <Button x:Name="btnAlignRight" Background="{x:Null}" BorderBrush="{x:Null}" Margin="58,0,29,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/align-right.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="87,0,0,0" >
-                                            <Image Height="30" Width="30" Source="/Resource/Icon/format.png"/>
+                                        <Button x:Name="btnAlignFormat" Background="{x:Null}" BorderBrush="{x:Null}" Margin="87,0,0,0" Click="btnWordAction">
+                                            <Image Height="30" Width="21" Source="/Resource/Icon/format.png"/>
                                         </Button>
                                     </Grid>
                                 </Border>
                                 <Border BorderThickness="0,0,0.5,0" BorderBrush="#FFFDEEEE" Margin="0,0,5,0" Width="73">
                                     <Grid Height="26" Width="54">
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,29,0" >
+                                        <Button x:Name="btnSizeIncrease" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,29,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/increase-font-size.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,0,0" >
+                                        <Button x:Name="btnSizeDecrease" Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,0,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/decrease-font-size.png"/>
                                         </Button>
                                     </Grid>
                                 </Border>
                                 <Border BorderThickness="0,0,0.5,0" BorderBrush="#FFFDEEEE" Margin="0,0,5,0" Width="95">
                                     <Grid Height="26" Width="84">
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,59,0" >
+                                        <Button x:Name="btnBold" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,59,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/bold.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,30,0" >
+                                        <Button x:Name="btnItalic" Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,30,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/italic.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="58,0,1,0" >
+                                        <Button x:Name="btnUnderline" Background="{x:Null}" BorderBrush="{x:Null}" Margin="58,0,1,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/underline.png"/>
                                         </Button>
                                     </Grid>
                                 </Border>
                                 <Border BorderThickness="0,0,0.5,0" BorderBrush="#FFFDEEEE" Margin="0,0,5,0" Width="95">
                                     <Grid Height="26" Width="83">
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,58,0" >
+                                        <Button x:Name="btnCut" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,58,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/cutting.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,29,0" >
+                                        <Button x:Name="btnCopy" Background="{x:Null}" BorderBrush="{x:Null}" Margin="29,0,29,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/copy.png"/>
                                         </Button>
-                                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="58,0,0,0" >
+                                        <Button x:Name="btnPaste" Background="{x:Null}" BorderBrush="{x:Null}" Margin="58,0,0,0" Click="btnWordAction">
                                             <Image Height="22" Width="21" Source="/Resource/Icon/paste.png"/>
                                         </Button>
                                     </Grid>
@@ -299,10 +306,21 @@
                         <Image Height="32" Width="42" Canvas.Left="16" Canvas.Top="62" Source="/Resource/Icon/tagging.png" OpacityMask="#FFC17F7F" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         <Label Height="32" Width="252" Canvas.Left="58" Canvas.Top="62" Content="Seogire" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFF9F9F9" FontFamily="Script MT Bold" FontSize="18" />
                         <ScrollViewer Canvas.Left="21" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" Width="631" Height="348" VerticalScrollBarVisibility="Hidden">
-                            <StackPanel>
-                                <TextBox Text="Your title should be here." FontFamily="Script MT Bold" FontSize="24" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" TextWrapping="Wrap" />
-                                <TextBox Text="This is where u should write some content. Maybe insert your image for better diary. Have a nice day" FontFamily="Script MT Bold" FontSize="16" Foreground="#FFB9B6B6" Background="{x:Null}" BorderBrush="{x:Null}" TextWrapping="Wrap" />
-
+                            <StackPanel x:Name="diaryBox">
+                                <RichTextBox Style="{StaticResource CustomRichTextBoxStyle}" x:Name="rtbTitle" Margin="10" VerticalScrollBarVisibility="Auto" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" GotKeyboardFocus="rtbDescription_PreviewGotKeyboardFocus" LostKeyboardFocus="rtbDescription_PreviewLostKeyboardFocus">
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text="Your title should be here." FontFamily="Script MT Bold" FontSize="24" Foreground="White"/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                                <RichTextBox Style="{StaticResource CustomRichTextBoxStyle}" x:Name="rtbDescription" Margin="10" VerticalScrollBarVisibility="Auto" Background="{x:Null}" BorderBrush="{x:Null}"  GotKeyboardFocus="rtbDescription_PreviewGotKeyboardFocus" LostKeyboardFocus="rtbDescription_PreviewLostKeyboardFocus">
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text="This is where u should write some content. Maybe insert your image for better diary. Have a nice day" FontFamily="Script MT Bold" FontSize="16" Foreground="#FFB9B6B6"/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
                             </StackPanel>
                         </ScrollViewer>
                     </Canvas>
