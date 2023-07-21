@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -94,7 +95,7 @@ namespace ProDiaryApplication.MenuItem
             }
             else if (btn.Name == "btnImportImage")
             {
-                FormatText("Image");
+                InsertImage_Click();
             }
             else if (btn.Name == "btnAlignLeft")
             {
@@ -143,9 +144,6 @@ namespace ProDiaryApplication.MenuItem
             else if (btn.Name == "btnPaste")
             {
                 FormatText("Paste");
-            }else if(btn.Name == "btnImportImage")
-            {
-                FormatText("Image");
             }
         }
         private void FormatText(string action)
@@ -232,9 +230,6 @@ namespace ProDiaryApplication.MenuItem
                             tr.ApplyPropertyValue(Inline.TextDecorationsProperty, underlineCollection);
                         }
                         break;
-                    case "Image":
-                        InsertImage_Click();
-                        break;
                 }
             }
         }
@@ -254,13 +249,11 @@ namespace ProDiaryApplication.MenuItem
             BitmapImage bitmapImage = new BitmapImage(new Uri(imagePath));
             image.Source = bitmapImage;
 
-
-            // Đặt kích thước cho hình ảnh (tùy chọn)
-            image.Width = 200;
-            image.Height = 150;
-
-            // Thêm hình ảnh vào StackPanel diaryBox
             diaryBox.Children.Add(image);
+            string rtbXaml = XamlWriter.Save(rtbDescription);
+            RichTextBox clonedRtb = (RichTextBox)XamlReader.Parse(rtbXaml);
+
+            diaryBox.Children.Add(clonedRtb);
         }
         [DebuggerHidden]
         private void rtbDescription_PreviewGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
