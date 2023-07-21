@@ -41,6 +41,7 @@
     <None Remove="Resource\Image\search.png" />
     <None Remove="Resource\Image\settings.png" />
     <None Remove="Resource\Image\star.png" />
+    <None Remove="Resource\Image\theMokoko.png" />
     <None Remove="Resource\Image\tool.png" />
     <None Remove="Resource\Image\trash.png" />
     <None Remove="Resource\Theme\Diary_in_the_night03.jpg" />
@@ -96,6 +97,7 @@
     <Resource Include="Resource\Image\request.png" />
     <Resource Include="Resource\Image\search.png" />
     <Resource Include="Resource\Image\star.png" />
+    <Resource Include="Resource\Image\theMokoko.png" />
     <Resource Include="Resource\Image\trash.png" />
     <Resource Include="Resource\Theme\Afternoon_in_a_Sunset01.gif" />
     <Resource Include="Resource\Image\nextArrow.png" />
