@@ -25,7 +25,10 @@ namespace ProDiaryApplication.MenuItem
     public partial class Memos : Window
     {
         private RichTextBox focusedRichTextBox = null;
-
+        private bool isNewDiaryCreated = false;
+        private bool isExistDiarySelection = false;
+        private bool isEmptyDiaryShow = false;
+        public Account? CurrentUser { get; set; }
         public Memos()
         {
             InitializeComponent();
@@ -33,12 +36,34 @@ namespace ProDiaryApplication.MenuItem
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
+            loadDataUser();
+        }
+
+        private void loadDataUser()
+        {
+            if (CurrentUser != null)
+            {
+                byte[]? avatarData = CurrentUser.Avatar;
+                if (avatarData != null && avatarData.Length > 0)
+                {
+                    using (MemoryStream stream = new MemoryStream(avatarData))
+                    {
+                        BitmapImage avatarImage = new BitmapImage();
+                        avatarImage.BeginInit();
+                        avatarImage.StreamSource = stream;
+                        avatarImage.CacheOption = BitmapCacheOption.OnLoad;
+                        avatarImage.EndInit();
+
+                        imgAvatar.Source = avatarImage;
+                    }
+                }
+            }
         }
 
         private void LoadData()
@@ -245,16 +270,20 @@ namespace ProDiaryApplication.MenuItem
         }
         private void CreateImageControl(string imagePath)
         {
+            StackPanel stackPanel = new StackPanel();
+
             Image image = new Image();
             BitmapImage bitmapImage = new BitmapImage(new Uri(imagePath));
             image.Source = bitmapImage;
 
-            diaryBox.Children.Add(image);
+            stackPanel.Children.Add(image);
             string rtbXaml = XamlWriter.Save(rtbDescription);
             RichTextBox clonedRtb = (RichTextBox)XamlReader.Parse(rtbXaml);
 
-            diaryBox.Children.Add(clonedRtb);
+            stackPanel.Children.Add(clonedRtb);
+            diaryBox.Children.Add(stackPanel);
         }
+
         [DebuggerHidden]
         private void rtbDescription_PreviewGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
@@ -265,6 +294,111 @@ namespace ProDiaryApplication.MenuItem
         private void rtbDescription_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             //focusedRichTextBox = null;
+        }
+
+        private void btnAddMemo_Click(object sender, RoutedEventArgs e)
+        {
+            isNewDiaryCreated = true;
+            checkCurrentWindow();
+            
+            using(DiaryNoteContext noteContext = new DiaryNoteContext())
+            {
+                string richTextBoxContent = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
+                string richTextBoxDescription = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
+                string? authorName = noteContext.Accounts.FirstOrDefault(i => i.Id == CurrentUser.Id).FullName;
+                Memo memo = new Memo();
+
+                memo.MemoTitle = richTextBoxContent;
+                memo.MemoContent = richTextBoxDescription;
+                memo.MemoAuthor = authorName;
+
+                noteContext.Memos.Add(memo);
+                noteContext.SaveChanges();
+                LoadData();
+            }
+        }
+        private void btnSaveMemo_Click(object sender, RoutedEventArgs e)
+        {
+            using (DiaryNoteContext context = new DiaryNoteContext())
+            {
+                List<MemoAddition> memoAdditions = new List<MemoAddition>();
+
+                foreach (var child in diaryBox.Children)
+                {
+                    if (child is StackPanel stackPanel)
+                    {
+                        // Assume each StackPanel contains one Image and one RichTextBox
+                        if (stackPanel.Children.Count == 2 &&
+                            stackPanel.Children[0] is Image image &&
+                            stackPanel.Children[1] is RichTextBox richTextBox)
+                        {
+                            // Get image data as byte array
+                            byte[] imageData = GetImageDataAsByteArray(image);
+
+                            // Get RichTextBox content as string
+                            string richTextBoxContent = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
+
+                            // Create a new MemoAddition object and add it to the list
+                            MemoAddition memoAddition = new MemoAddition
+                            {
+                                MemoAttachments = imageData,
+                                MemoContentAddition = richTextBoxContent
+                            };
+                            memoAdditions.Add(memoAddition);
+                        }
+                    }
+                }
+
+                // Now you have a list of MemoAddition objects, you can add them to the Database.
+                context.MemoAdditions.AddRange(memoAdditions);
+                context.SaveChanges();
+            }
+        }
+
+        private byte[] GetImageDataAsByteArray(Image image)
+        {
+            BitmapImage bitmapImage = image.Source as BitmapImage;
+            if (bitmapImage != null)
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    encoder.Save(memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+            return null;
+        }
+
+        private void ShowDiaryControl(Border controlToShow)
+        {
+            List<Border> diaryControls = new List<Border> { emptyDiary, existDiary, trueDiary };
+
+            // Ẩn tất cả các control nhật ký trước khi hiển thị control mới
+            foreach (var control in diaryControls)
+            {
+                control.Visibility = Visibility.Hidden;
+            }
+
+            // Hiển thị control cần hiển thị
+            controlToShow.Visibility = Visibility.Visible;
+        }
+
+        private void checkCurrentWindow()
+        {
+            if (isEmptyDiaryShow)
+            {
+                ShowDiaryControl(emptyDiary);
+            }
+            else if (isExistDiarySelection)
+            {
+                ShowDiaryControl(existDiary);
+            }
+            else if (isNewDiaryCreated)
+            {
+                ShowDiaryControl(trueDiary);
+            }
         }
     }
 }

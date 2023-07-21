@@ -1,4 +1,5 @@
-﻿using ProDiaryApplication.Models;
+﻿using ProDiaryApplication.MenuItem;
+using ProDiaryApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -210,6 +211,13 @@ namespace ProDiaryApplication
         private void mainWindow_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void StackPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Memos memos = new Memos();
+            memos.CurrentUser = CurrentUser;
+            memos.Show();
         }
     }
 }

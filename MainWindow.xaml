@@ -27,8 +27,8 @@
                 <Menu Height="64" Width="982" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="236" Canvas.Top="16" Background="{x:Null}">
                     <MenuItem Width="181" Height="66" HorizontalAlignment="Left" Padding="6,0,6,0" Margin="0,0,15,0">
                         <MenuItem.Header>
-                            <Border Background="#FF585656" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Canvas.Top="19" VerticalAlignment="Center" Canvas.Left="10" Margin="-7,0,0,0" >
-                                <StackPanel Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
+                            <Border x:Name="btnMemos" Background="#FF585656" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Canvas.Top="19" VerticalAlignment="Center" Canvas.Left="10" Margin="-7,0,0,0" >
+                                <StackPanel Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand" MouseLeftButtonUp="StackPanel_MouseLeftButtonUp">
                                     <Image Source="/Resource/Image/notes.png" Height="50" Width="50" Margin="5,0,0,0" />
                                     <Label Content="Memos" FontFamily="Script MT Bold" FontSize="24" Foreground="White" Width="121" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                 </StackPanel>
@@ -38,7 +38,7 @@
                     <MenuItem Width="181" Height="66" HorizontalAlignment="Left" Padding="6,0,6,0" Margin="0,0,15,0">
                         <MenuItem.Header>
                             <Border Background="#FF585656" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Canvas.Top="19" VerticalAlignment="Center" Canvas.Left="10" Margin="-7,0,0,0" >
-                                <StackPanel Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
+                                <StackPanel x:Name="btnTasks" Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
                                     <Image Source="/Resource/Image/add-memo.png" Height="50" Width="50" Margin="2,0,0,0" />
                                     <Label Content="Tasks" FontFamily="Script MT Bold" FontSize="24" Foreground="White" Width="121" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                 </StackPanel>
@@ -48,7 +48,7 @@
                     <MenuItem Width="181" Height="66" HorizontalAlignment="Left" Padding="6,0,6,0" Margin="0,0,15,0">
                         <MenuItem.Header>
                             <Border Background="#FF585656" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Canvas.Top="19" VerticalAlignment="Center" Canvas.Left="10" Margin="-7,0,0,0" >
-                                <StackPanel Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
+                                <StackPanel x:Name="btnSettings" Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
                                     <Image Source="/Resource/Image/settings.png" Height="50" Width="50" Margin="5,0,0,0" />
                                     <Label Content="Settings" FontFamily="Script MT Bold" FontSize="24" Foreground="White" Width="121" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                 </StackPanel>
@@ -58,7 +58,7 @@
                     <MenuItem Width="181" Height="66" HorizontalAlignment="Left" Padding="6,0,6,0" Margin="0,0,15,0">
                         <MenuItem.Header>
                             <Border Background="#FF585656" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Canvas.Top="19" VerticalAlignment="Center" Canvas.Left="10" Margin="-7,0,0,0" >
-                                <StackPanel Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
+                                <StackPanel x:Name="btnTool" Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
                                     <Image Source="/Resource/Image/tool.png" Height="50" Width="50" Margin="5,0,0,0" />
                                     <Label Content="Tools" FontFamily="Script MT Bold" FontSize="24" Foreground="White" Width="121" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                 </StackPanel>
@@ -68,7 +68,7 @@
                     <MenuItem Width="181" Height="66" HorizontalAlignment="Left" Padding="6,0,6,0" Margin="0,0,15,0">
                         <MenuItem.Header>
                             <Border Background="#FF585656" CornerRadius="5,5,5,5" HorizontalAlignment="Center" Canvas.Top="19" VerticalAlignment="Center" Canvas.Left="10" Margin="-7,0,0,0" >
-                                <StackPanel Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
+                                <StackPanel x:Name="btnAbout" Height="64" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Canvas.Top="5" Canvas.Left="4" Cursor="Hand">
                                     <Image Source="/Resource/Image/file.png" Height="50" Width="50" Margin="5,0,0,0" />
                                     <Label Content="About Us" FontFamily="Script MT Bold" FontSize="24" Foreground="White" Width="121" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
                                 </StackPanel>
