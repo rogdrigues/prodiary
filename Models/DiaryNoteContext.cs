@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace ProDiaryApplication.Models
 {
@@ -20,16 +18,17 @@ namespace ProDiaryApplication.Models
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Memo> Memos { get; set; } = null!;
+        public virtual DbSet<MemoAddition> MemoAdditions { get; set; } = null!;
         public virtual DbSet<MemoTag> MemoTags { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                                          .SetBasePath(Directory.GetCurrentDirectory())
-                                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=localhost;database=DiaryNote;uid=sa;pwd=123;TrustServerCertificate=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -70,6 +69,20 @@ namespace ProDiaryApplication.Models
                 entity.Property(e => e.MemoUpdated)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<MemoAddition>(entity =>
+            {
+                entity.ToTable("MemoAddition");
+
+                entity.Property(e => e.MemoAdditionId).HasColumnName("MemoAdditionID");
+
+                entity.Property(e => e.MemoId).HasColumnName("MemoID");
+
+                entity.HasOne(d => d.Memo)
+                    .WithMany(p => p.MemoAdditions)
+                    .HasForeignKey(d => d.MemoId)
+                    .HasConstraintName("FK__MemoAddit__MemoI__5CD6CB2B");
             });
 
             modelBuilder.Entity<MemoTag>(entity =>
