@@ -1,8 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using ProDiaryApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,16 +21,38 @@ using System.Windows.Shapes;
 
 namespace ProDiaryApplication.MenuItem
 {
-    /// <summary>
-    /// Interaction logic for Memos.xaml
-    /// </summary>
+    public class ByteArrayToImageSourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is byte[] imageData && imageData.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream(imageData))
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = memoryStream;
+                    image.EndInit();
+                    return image;
+                }
+            }
+
+            return DependencyProperty.UnsetValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public partial class Memos : Window
     {
         private RichTextBox focusedRichTextBox = null;
         private bool isNewDiaryCreated = false;
-        private bool isExistDiarySelection = false;
         private bool isEmptyDiaryShow = false;
         public Account? CurrentUser { get; set; }
+        private Memo currentMemoSelected { get; set; }
         public Memos()
         {
             InitializeComponent();
@@ -73,17 +97,7 @@ namespace ProDiaryApplication.MenuItem
                 var tags = context.Tags.ToList();
                 tagLists.ItemsSource = tags;
 
-                var memos = context.Memos.ToList();
-                foreach (var memo in memos)
-                {
-                    if (memo.MemoAttachments != null)
-                    {
-                        var image = new Image();
-                        image.Source = LoadImageFromByteArray(memo.MemoAttachments);
-                        image.Width = 100; 
-                        image.Height = 100;
-                    }
-                }
+                var memos = context.Memos.Where(i => i.MemoAuthor == CurrentUser.FullName).OrderByDescending(i => i.MemoUpdated).ToList();
                 memoList.ItemsSource = memos;
             }
         }
@@ -110,11 +124,11 @@ namespace ProDiaryApplication.MenuItem
         {
             Button btn = sender as Button;
 
-            if(btn.Name == "btnUndo")
+            if (btn.Name == "btnUndo")
             {
                 FormatText("Undo");
             }
-            else if(btn.Name == "btnRedo")
+            else if (btn.Name == "btnRedo")
             {
                 FormatText("Redo");
             }
@@ -296,12 +310,87 @@ namespace ProDiaryApplication.MenuItem
             //focusedRichTextBox = null;
         }
 
-        private void btnAddMemo_Click(object sender, RoutedEventArgs e)
+        private void MemoBorder_PreviewMouseDown(object sender, MouseButtonEventArgs? e)
         {
+            if (sender is Border border)
+            {
+                if (border.DataContext is Memo memo)
+                {
+                    currentMemoSelected = memo;
+                    showExistDiary();
+                }
+            }
+        }
+
+        private void showExistDiary()
+        {
+            defaultValueSet();
             isNewDiaryCreated = true;
             checkCurrentWindow();
+
+            using (DiaryNoteContext noteContext = new DiaryNoteContext())
+            {
+                ClearDiaryBoxExceptRichTextBox();
+                rtbTitleRun.Text = currentMemoSelected.MemoTitle.Trim();
+                rtbDescriptionRun.Text = currentMemoSelected.MemoContent.Trim();
+
+                List<MemoAddition> memoAddition = noteContext.MemoAdditions.Where(i => i.MemoId == currentMemoSelected.MemoId).ToList();
             
-            using(DiaryNoteContext noteContext = new DiaryNoteContext())
+                foreach(MemoAddition memo in memoAddition)
+                {
+                    StackPanel stackPanel = new StackPanel();
+
+                    Image image = new Image();
+                    image.Source = LoadImageFromByteArray(memo.MemoAttachments);
+
+                    stackPanel.Children.Add(image);
+
+                    RichTextBox clonedRtb = new RichTextBox();
+                    FlowDocument doc = new FlowDocument();
+                    Paragraph paragraph = new Paragraph();
+
+                    Run run = new Run(memo.MemoContentAddition)
+                    {
+                        FontFamily = new FontFamily("Script MT Bold"),
+                        FontSize = 16,
+                        Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xB9, 0xB6, 0xB6))
+                    };
+                    paragraph.Inlines.Add(run);
+                    doc.Blocks.Add(paragraph);
+                    clonedRtb.Document = doc;
+                    clonedRtb.Background = null;
+                    clonedRtb.BorderBrush = null;
+
+                    stackPanel.Children.Add(clonedRtb);
+                    diaryBox.Children.Add(stackPanel);
+                }
+            }
+        }
+        private void ClearDiaryBoxExceptRichTextBox()
+        {
+            List<UIElement> elementsToRemove = new List<UIElement>();
+
+            foreach (var child in diaryBox.Children)
+            {
+                if ((child is StackPanel))
+                {
+                    elementsToRemove.Add((UIElement)child);
+                }
+            }
+
+            foreach (var element in elementsToRemove)
+            {
+                diaryBox.Children.Remove(element);
+            }
+        }
+
+        private void btnAddMemo_Click(object sender, RoutedEventArgs e)
+        {
+            defaultValueSet();
+            isNewDiaryCreated = true;
+            checkCurrentWindow();
+
+            using (DiaryNoteContext noteContext = new DiaryNoteContext())
             {
                 string richTextBoxContent = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
                 string richTextBoxDescription = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
@@ -312,46 +401,74 @@ namespace ProDiaryApplication.MenuItem
                 memo.MemoContent = richTextBoxDescription;
                 memo.MemoAuthor = authorName;
 
+
                 noteContext.Memos.Add(memo);
                 noteContext.SaveChanges();
+                currentMemoSelected = memo;
                 LoadData();
+                selectNewDiary();
             }
         }
         private void btnSaveMemo_Click(object sender, RoutedEventArgs e)
         {
+            bool isFirstImage = true;
             using (DiaryNoteContext context = new DiaryNoteContext())
             {
-                List<MemoAddition> memoAdditions = new List<MemoAddition>();
+                List<MemoAddition> memoAdditionsNew = new List<MemoAddition>();
+                List<MemoAddition> existingMemoAdditions = context.MemoAdditions.Where(m => m.MemoId == currentMemoSelected.MemoId).ToList();
+                context.MemoAdditions.RemoveRange(existingMemoAdditions);
 
                 foreach (var child in diaryBox.Children)
                 {
                     if (child is StackPanel stackPanel)
                     {
-                        // Assume each StackPanel contains one Image and one RichTextBox
                         if (stackPanel.Children.Count == 2 &&
                             stackPanel.Children[0] is Image image &&
                             stackPanel.Children[1] is RichTextBox richTextBox)
                         {
-                            // Get image data as byte array
                             byte[] imageData = GetImageDataAsByteArray(image);
 
-                            // Get RichTextBox content as string
                             string richTextBoxContent = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
 
-                            // Create a new MemoAddition object and add it to the list
                             MemoAddition memoAddition = new MemoAddition
                             {
+                                MemoId = currentMemoSelected.MemoId,
                                 MemoAttachments = imageData,
                                 MemoContentAddition = richTextBoxContent
                             };
-                            memoAdditions.Add(memoAddition);
+                            memoAdditionsNew.Add(memoAddition);
+
+                            if (isFirstImage)
+                            {
+                                Memo? memo = context.Memos.FirstOrDefault(i => i.MemoId == currentMemoSelected.MemoId);
+                                if(memo != null)
+                                {
+                                    string richTextBoxContentUpdate = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
+                                    string richTextBoxDescriptionUpdate = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
+
+                                    memo.MemoTitle = richTextBoxContentUpdate;
+                                    memo.MemoContent = richTextBoxDescriptionUpdate;
+                                    memo.MemoAttachments = imageData;
+                                    memo.MemoUpdated = DateTime.Now;
+                                    context.Memos.Update(memo);
+                                }
+                                isFirstImage = false;
+                            }
                         }
                     }
                 }
 
-                // Now you have a list of MemoAddition objects, you can add them to the Database.
-                context.MemoAdditions.AddRange(memoAdditions);
-                context.SaveChanges();
+                context.MemoAdditions.AddRange(memoAdditionsNew);
+                int result = context.SaveChanges();
+                if (result != 0)
+                {
+                    LoadData();
+                    MessageBox.Show("Diary successfully update!");
+                }
+                else
+                {
+                    MessageBox.Show("Diary failed to update!");
+                }
             }
         }
 
@@ -373,15 +490,13 @@ namespace ProDiaryApplication.MenuItem
 
         private void ShowDiaryControl(Border controlToShow)
         {
-            List<Border> diaryControls = new List<Border> { emptyDiary, existDiary, trueDiary };
+            List<Border> diaryControls = new List<Border> { emptyDiary, trueDiary };
 
-            // Ẩn tất cả các control nhật ký trước khi hiển thị control mới
             foreach (var control in diaryControls)
             {
                 control.Visibility = Visibility.Hidden;
             }
 
-            // Hiển thị control cần hiển thị
             controlToShow.Visibility = Visibility.Visible;
         }
 
@@ -391,14 +506,53 @@ namespace ProDiaryApplication.MenuItem
             {
                 ShowDiaryControl(emptyDiary);
             }
-            else if (isExistDiarySelection)
-            {
-                ShowDiaryControl(existDiary);
-            }
             else if (isNewDiaryCreated)
             {
                 ShowDiaryControl(trueDiary);
             }
+        }
+
+        private void defaultValueSet()
+        {
+            isEmptyDiaryShow = false;
+            isNewDiaryCreated = false;
+        }
+
+        private void btnDeleteMemo_Click(object sender, RoutedEventArgs e)
+        {
+            using (DiaryNoteContext noteContext = new DiaryNoteContext())
+            {
+                var memoSelected = noteContext.Memos
+                    .Include(i => i.MemoAdditions)
+                    .SingleOrDefault(i => i.MemoId == currentMemoSelected.MemoId);
+
+                if (memoSelected != null)
+                {
+                    noteContext.MemoAdditions.RemoveRange(memoSelected.MemoAdditions);
+
+                    noteContext.Memos.Remove(memoSelected);
+
+                    int result = noteContext.SaveChanges();
+
+                    if (result != 0)
+                    {
+                        LoadData();
+                        defaultValueSet();
+                        isEmptyDiaryShow = true;
+                        checkCurrentWindow();
+                        MessageBox.Show("Diary successfully update!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Diary failed to update!");
+                    }
+                }
+            }
+        }
+
+        private void selectNewDiary()
+        {
+            //Adding here
         }
     }
 }

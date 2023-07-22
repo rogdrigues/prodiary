@@ -2,6 +2,7 @@
 using ProDiaryApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -61,7 +62,7 @@ namespace ProDiaryApplication
                 txtUserID.Text = userID;
             }
         }
-
+        [DebuggerHidden]
         private void timeUpdate()
         {
             DispatcherTimer timer = new DispatcherTimer();
@@ -69,7 +70,7 @@ namespace ProDiaryApplication
             timer.Tick += time_update;
             timer.Start();
         }
-
+        [DebuggerHidden]
         void time_update(object? sender, EventArgs e)
         {
             this.lblTimeCurrent.Content = System.DateTime.Now.ToString("HH:mm:ss");
