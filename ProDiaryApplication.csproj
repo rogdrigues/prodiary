@@ -68,7 +68,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="MenuItem\82780939_p0.jpg" />
     <Resource Include="Resource\Icon\align-left.png" />
     <Resource Include="Resource\Icon\align-right.png" />
     <Resource Include="Resource\Icon\bold.png" />

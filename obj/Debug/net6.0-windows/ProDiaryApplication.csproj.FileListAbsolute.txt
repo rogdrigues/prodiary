@@ -68,3 +68,4 @@ D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\refint\ProDiaryA
 D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\ProDiaryApplication.pdb
 D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\ProDiaryApplication.genruntimeconfig.cache
 D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\ref\ProDiaryApplication.dll
+D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
