@@ -49,8 +49,9 @@ namespace ProDiaryApplication.MenuItem
     public partial class Memos : Window
     {
         private RichTextBox focusedRichTextBox = null;
-        private bool isNewDiaryCreated = false;
-        private bool isEmptyDiaryShow = false;
+        private bool isEmptyDiaryShow, isNewDiaryCreated, isDateCreatedSort, isTitleSort = false;
+        private bool isNewDiary, isDateUpdatedSort = true;
+
         public Account? CurrentUser { get; set; }
         private Memo currentMemoSelected { get; set; }
         public Memos()
@@ -98,6 +99,47 @@ namespace ProDiaryApplication.MenuItem
                 tagLists.ItemsSource = tags;
 
                 var memos = context.Memos.Where(i => i.MemoAuthor == CurrentUser.FullName).OrderByDescending(i => i.MemoUpdated).ToList();
+                memoList.ItemsSource = memos;
+            }
+        }
+
+        private void LoadDataWithKeyWord(string keyword)
+        {
+            using (DiaryNoteContext context = new DiaryNoteContext())
+            {
+                var memos = context.Memos.Where(i => i.MemoAuthor == CurrentUser.FullName)
+                     .Where(i => i.MemoTitle.Contains(keyword) || i.MemoContent.Contains(keyword))
+                     .OrderByDescending(i => i.MemoUpdated).ToList();
+                memoList.ItemsSource = memos;
+            }
+        }
+
+        private void LoadDataWithFilterKeyWord()
+        {
+            using (DiaryNoteContext context = new DiaryNoteContext())
+            {
+                var memosQuery = context.Memos.Where(i => i.MemoAuthor == CurrentUser.FullName);
+
+                if (isNewDiary)
+                {
+                    if (isDateUpdatedSort)
+                        memosQuery = memosQuery.OrderByDescending(i => i.MemoUpdated);
+                    else if (isDateCreatedSort)
+                        memosQuery = memosQuery.OrderByDescending(i => i.MemoCreated);
+                    else if (isTitleSort)
+                        memosQuery = memosQuery.OrderByDescending(i => i.MemoTitle);
+                }
+                else
+                {
+                    if (isDateUpdatedSort)
+                        memosQuery = memosQuery.OrderBy(i => i.MemoUpdated);
+                    else if (isDateCreatedSort)
+                        memosQuery = memosQuery.OrderBy(i => i.MemoCreated);
+                    else if (isTitleSort)
+                        memosQuery = memosQuery.OrderBy(i => i.MemoTitle);
+                }
+
+                var memos = memosQuery.ToList();
                 memoList.ItemsSource = memos;
             }
         }
@@ -335,8 +377,8 @@ namespace ProDiaryApplication.MenuItem
                 rtbDescriptionRun.Text = currentMemoSelected.MemoContent.Trim();
 
                 List<MemoAddition> memoAddition = noteContext.MemoAdditions.Where(i => i.MemoId == currentMemoSelected.MemoId).ToList();
-            
-                foreach(MemoAddition memo in memoAddition)
+
+                foreach (MemoAddition memo in memoAddition)
                 {
                     StackPanel stackPanel = new StackPanel();
 
@@ -390,87 +432,104 @@ namespace ProDiaryApplication.MenuItem
             isNewDiaryCreated = true;
             checkCurrentWindow();
 
-            using (DiaryNoteContext noteContext = new DiaryNoteContext())
+            try
             {
-                string richTextBoxContent = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
-                string richTextBoxDescription = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
-                string? authorName = noteContext.Accounts.FirstOrDefault(i => i.Id == CurrentUser.Id).FullName;
-                Memo memo = new Memo();
+                using (DiaryNoteContext noteContext = new DiaryNoteContext())
+                {
+                    string richTextBoxContent = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
+                    string richTextBoxDescription = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
+                    string? authorName = noteContext.Accounts.FirstOrDefault(i => i.Id == CurrentUser.Id)?.FullName;
+                    Memo memo = new Memo();
 
-                memo.MemoTitle = richTextBoxContent;
-                memo.MemoContent = richTextBoxDescription;
-                memo.MemoAuthor = authorName;
+                    memo.MemoTitle = richTextBoxContent;
+                    memo.MemoContent = richTextBoxDescription;
+                    memo.MemoAuthor = authorName;
 
-
-                noteContext.Memos.Add(memo);
-                noteContext.SaveChanges();
-                currentMemoSelected = memo;
-                LoadData();
-                selectNewDiary();
+                    noteContext.Memos.Add(memo);
+                    noteContext.SaveChanges();
+                    currentMemoSelected = memo;
+                    txtSearch.Text = "";
+                    LoadData();
+                    showExistDiary();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while adding the Memo: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
         private void btnSaveMemo_Click(object sender, RoutedEventArgs e)
         {
             bool isFirstImage = true;
-            using (DiaryNoteContext context = new DiaryNoteContext())
+            try
             {
-                List<MemoAddition> memoAdditionsNew = new List<MemoAddition>();
-                List<MemoAddition> existingMemoAdditions = context.MemoAdditions.Where(m => m.MemoId == currentMemoSelected.MemoId).ToList();
-                context.MemoAdditions.RemoveRange(existingMemoAdditions);
-
-                foreach (var child in diaryBox.Children)
+                using (DiaryNoteContext context = new DiaryNoteContext())
                 {
-                    if (child is StackPanel stackPanel)
+                    List<MemoAddition> memoAdditionsNew = new List<MemoAddition>();
+                    List<MemoAddition> existingMemoAdditions = context.MemoAdditions.Where(m => m.MemoId == currentMemoSelected.MemoId).ToList();
+                    context.MemoAdditions.RemoveRange(existingMemoAdditions);
+
+                    foreach (var child in diaryBox.Children)
                     {
-                        if (stackPanel.Children.Count == 2 &&
-                            stackPanel.Children[0] is Image image &&
-                            stackPanel.Children[1] is RichTextBox richTextBox)
+                        if (child is StackPanel stackPanel)
                         {
-                            byte[] imageData = GetImageDataAsByteArray(image);
-
-                            string richTextBoxContent = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
-
-                            MemoAddition memoAddition = new MemoAddition
+                            if (stackPanel.Children.Count == 2 &&
+                                stackPanel.Children[0] is Image image &&
+                                stackPanel.Children[1] is RichTextBox richTextBox)
                             {
-                                MemoId = currentMemoSelected.MemoId,
-                                MemoAttachments = imageData,
-                                MemoContentAddition = richTextBoxContent
-                            };
-                            memoAdditionsNew.Add(memoAddition);
+                                byte[] imageData = GetImageDataAsByteArray(image);
 
-                            if (isFirstImage)
-                            {
-                                Memo? memo = context.Memos.FirstOrDefault(i => i.MemoId == currentMemoSelected.MemoId);
-                                if(memo != null)
+                                string richTextBoxContent = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
+
+                                MemoAddition memoAddition = new MemoAddition
                                 {
-                                    string richTextBoxContentUpdate = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
-                                    string richTextBoxDescriptionUpdate = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
+                                    MemoId = currentMemoSelected.MemoId,
+                                    MemoAttachments = imageData,
+                                    MemoContentAddition = richTextBoxContent
+                                };
+                                memoAdditionsNew.Add(memoAddition);
 
-                                    memo.MemoTitle = richTextBoxContentUpdate;
-                                    memo.MemoContent = richTextBoxDescriptionUpdate;
-                                    memo.MemoAttachments = imageData;
-                                    memo.MemoUpdated = DateTime.Now;
-                                    context.Memos.Update(memo);
+                                if (isFirstImage)
+                                {
+                                    Memo? memo = context.Memos.FirstOrDefault(i => i.MemoId == currentMemoSelected.MemoId);
+                                    if (memo != null)
+                                    {
+                                        string richTextBoxContentUpdate = new TextRange(rtbTitle.Document.ContentStart, rtbTitle.Document.ContentEnd).Text;
+                                        string richTextBoxDescriptionUpdate = new TextRange(rtbDescription.Document.ContentStart, rtbDescription.Document.ContentEnd).Text;
+
+                                        memo.MemoTitle = richTextBoxContentUpdate;
+                                        memo.MemoContent = richTextBoxDescriptionUpdate;
+                                        memo.MemoAttachments = imageData;
+                                        memo.MemoUpdated = DateTime.Now;
+                                        context.Memos.Update(memo);
+                                    }
+                                    isFirstImage = false;
                                 }
-                                isFirstImage = false;
                             }
                         }
                     }
-                }
 
-                context.MemoAdditions.AddRange(memoAdditionsNew);
-                int result = context.SaveChanges();
-                if (result != 0)
-                {
-                    LoadData();
-                    MessageBox.Show("Diary successfully update!");
-                }
-                else
-                {
-                    MessageBox.Show("Diary failed to update!");
+                    context.MemoAdditions.AddRange(memoAdditionsNew);
+                    int result = context.SaveChanges();
+                    if (result != 0)
+                    {
+                        checkSearchBarStatus();
+                        MessageBox.Show("Diary successfully update!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Diary failed to update!");
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while saving the Diary: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private byte[] GetImageDataAsByteArray(Image image)
         {
@@ -518,41 +577,136 @@ namespace ProDiaryApplication.MenuItem
             isNewDiaryCreated = false;
         }
 
+        private void defaultValueSetForFilter()
+        {
+            isDateUpdatedSort = false;
+            isDateCreatedSort = false;
+            isTitleSort = false;
+
+        }
+
         private void btnDeleteMemo_Click(object sender, RoutedEventArgs e)
         {
-            using (DiaryNoteContext noteContext = new DiaryNoteContext())
+            try
             {
-                var memoSelected = noteContext.Memos
-                    .Include(i => i.MemoAdditions)
-                    .SingleOrDefault(i => i.MemoId == currentMemoSelected.MemoId);
-
-                if (memoSelected != null)
+                using (DiaryNoteContext noteContext = new DiaryNoteContext())
                 {
-                    noteContext.MemoAdditions.RemoveRange(memoSelected.MemoAdditions);
+                    var memoSelected = noteContext.Memos
+                        .Include(i => i.MemoAdditions)
+                        .SingleOrDefault(i => i.MemoId == currentMemoSelected.MemoId);
 
-                    noteContext.Memos.Remove(memoSelected);
-
-                    int result = noteContext.SaveChanges();
-
-                    if (result != 0)
+                    if (memoSelected != null)
                     {
-                        LoadData();
-                        defaultValueSet();
-                        isEmptyDiaryShow = true;
-                        checkCurrentWindow();
-                        MessageBox.Show("Diary successfully update!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Diary failed to update!");
+                        noteContext.MemoAdditions.RemoveRange(memoSelected.MemoAdditions);
+                        noteContext.Memos.Remove(memoSelected);
+
+                        int result = noteContext.SaveChanges();
+
+                        if (result != 0)
+                        {
+                            checkSearchBarStatus();
+                            defaultValueSet();
+                            isEmptyDiaryShow = true;
+                            checkCurrentWindow();
+                            MessageBox.Show("Diary successfully deleted!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Diary failed to delete!");
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while deleting the Diary: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private void selectNewDiary()
+
+        private void checkSearchBarStatus()
         {
-            //Adding here
+            string keyword = txtSearch.Text.Trim();
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                LoadData();
+            }
+            else
+            {
+                LoadDataWithKeyWord(keyword);
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            checkSearchBarStatus();
+        }
+
+        private void btnFilter_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            defaultValueSetForFilter();
+            Border? border = sender as Border;
+
+            if(border.Name == "btnFilterNewDiary" || border.Name == "btnFilterOldDiary")
+            {
+                if (border.Name == "btnFilterNewDiary")
+                {
+                    isNewDiary = true;
+                }
+                else if (border.Name == "btnFilterOldDiary")
+                {
+                    isNewDiary = false;
+                }
+                SetLabelBlockDefaultContentOrder();
+            }
+            else
+            {
+                ResetFilterText();
+                if (border.Name == "btnFilterDateUpdated")
+                {
+                    isDateUpdatedSort = true;
+                    SetTextBlockDefaultContent(tbDateUpdated);
+                }
+                else if (border.Name == "btnFilterDateCreated")
+                {
+                    isDateCreatedSort = true;
+                    SetTextBlockDefaultContent(tbDateCreated);
+                }
+                else if (border.Name == "btnFilterTitle")
+                {
+                    isTitleSort = true;
+                    SetTextBlockDefaultContent(tbFilterTitle);
+                }
+            }
+           
+            LoadDataWithFilterKeyWord();
+        }
+
+        private void ResetFilterText()
+        {
+            tbDateUpdated.Content = "Date Updated";
+            tbDateCreated.Content = "Date Created";
+            tbFilterTitle.Content = "Title";
+        }
+
+        private void SetTextBlockDefaultContent(Label labelBlock)
+        {
+            labelBlock.Content = labelBlock.Content.ToString() + " (Default)";
+        }
+        private void SetLabelBlockDefaultContentOrder()
+        {
+            tbNewDiaryFilter.Content = "New Diary";
+            tbOldDiaryFilter.Content = "Old Diary";
+            Label labelBlock = new Label();
+            if (isNewDiary)
+            {
+                labelBlock = tbNewDiaryFilter;
+            }
+            else
+            {
+                labelBlock = tbOldDiaryFilter;
+            }
+            labelBlock.Content = labelBlock.Content.ToString() + " (Default)";
         }
     }
 }

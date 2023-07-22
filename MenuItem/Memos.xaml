@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProDiaryApplication.MenuItem"
         mc:Ignorable="d"
-        Title="PiligonDiary" Height="600" Width="1300" Icon="/Resource/Image/iconImage.jpg" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" ShowInTaskbar="False" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
+        Title="PiligonDiary" Height="700" Width="1600" Icon="/Resource/Image/iconImage.jpg" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" ShowInTaskbar="False" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Topmost="True" >
     <Window.Background>
         <ImageBrush x:Name="windowBG" ImageSource="/Resource/Theme/Diary_in_the_night03.jpg"/>
     </Window.Background>
@@ -19,7 +19,7 @@
         <local:ByteArrayToImageSourceConverter x:Name="binaryConverter" x:Key="byteToImageConverter"/>
     </Window.Resources>
     <Grid>
-        <DockPanel LastChildFill="True" Height="564" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1280">
+        <DockPanel LastChildFill="True" Height="664" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1580">
             <StackPanel x:Name="sidebar_panel" Width="230">
                 <StackPanel.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -36,15 +36,15 @@
                             <GradientStop Color="White" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.BorderBrush>
-                    <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="217" HorizontalAlignment="Left" Margin="7,5,0,5" Background="#B2CAB9B9" Cursor="Hand">
+                    <Border x:Name="btnGoBackMainMenu" BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="217" HorizontalAlignment="Left" Margin="7,5,0,5" Background="#B2CAB9B9" Cursor="Hand">
                         <StackPanel Width="222" HorizontalAlignment="Center" Orientation="Horizontal">
                             <Image Source="/Resource/Image/left.png" Height="35" Width="132" OpacityMask="#FFFFFCFC" />
                             <Label Width="77" Content="Go Back" VerticalAlignment="Center" FontFamily="Script MT Bold" Foreground="White" FontSize="20" Margin="-50,0,0,0" />
                         </StackPanel>
                     </Border>
                 </Border>
-                <Label Content="Filter" Canvas.Top="52" Foreground="White" FontFamily="Script MT Bold" HorizontalAlignment="Left" Width="36"/>
-                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Margin="0,0,0,10" Cursor="Hand">
+                <Label Content="Sort By" Canvas.Top="52" Foreground="White" FontFamily="Script MT Bold" HorizontalAlignment="Left"/>
+                <Border x:Name="btnFilterDateUpdated" BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Margin="0,0,0,10" Cursor="Hand" MouseLeftButtonUp="btnFilter_MouseLeftButtonUp">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#99BFB1B1"/>
@@ -53,10 +53,10 @@
                     </Border.Background>
                     <StackPanel Height="24" Width="226" HorizontalAlignment="Center" Orientation="Horizontal" Canvas.Top="52" VerticalAlignment="Top">
                         <Image Source="/Resource/Image/alldiary.png" Height="21" Width="33" OpacityMask="White" Margin="10,0,0,0" />
-                        <Label Content="All" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
+                        <Label x:Name="tbDateUpdated" Content="Date Updated (Default)" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
                     </StackPanel>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Margin="0,0,0,8" Cursor="Hand">
+                <Border x:Name="btnFilterDateCreated" BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Margin="0,0,0,8" Cursor="Hand" MouseLeftButtonUp="btnFilter_MouseLeftButtonUp">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#99BFB1B1"/>
@@ -65,10 +65,10 @@
                     </Border.Background>
                     <StackPanel Height="24" Width="226" HorizontalAlignment="Center" Orientation="Horizontal" Canvas.Top="52" VerticalAlignment="Top">
                         <Image Source="/Resource/Image/star.png" Height="23" Width="33" OpacityMask="White" Margin="10,0,0,0" />
-                        <Label Content="Marked" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
+                        <Label x:Name="tbDateCreated" Content="Date Created" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
                     </StackPanel>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Cursor="Hand">
+                <Border x:Name="btnFilterTitle" BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Cursor="Hand" MouseLeftButtonUp="btnFilter_MouseLeftButtonUp">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#99BFB1B1"/>
@@ -77,11 +77,11 @@
                     </Border.Background>
                     <StackPanel Height="24" Width="226" HorizontalAlignment="Center" Orientation="Horizontal" Canvas.Top="52" VerticalAlignment="Top">
                         <Image Source="/Resource/Image/trash.png" Height="17" Width="33" OpacityMask="White" Margin="10,0,0,0" />
-                        <Label Content="Trash" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
+                        <Label x:Name="tbFilterTitle" Content="Title" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
                     </StackPanel>
                 </Border>
-                <Label Content="Settings" Canvas.Top="195" Foreground="White" FontFamily="Script MT Bold" HorizontalAlignment="Left" Width="46"/>
-                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Margin="0,0,0,10" Height="28" Cursor="Hand">
+                <Label Content="Option Sort" Canvas.Top="195" Foreground="White" FontFamily="Script MT Bold" HorizontalAlignment="Left"/>
+                <Border x:Name="btnFilterNewDiary" BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Margin="0,0,0,10" Height="28" Cursor="Hand" MouseLeftButtonUp="btnFilter_MouseLeftButtonUp">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#99BFB1B1"/>
@@ -90,10 +90,10 @@
                     </Border.Background>
                     <StackPanel Height="29" Width="226" HorizontalAlignment="Center" Orientation="Horizontal" Canvas.Top="52" VerticalAlignment="Top" Margin="0,0,0,4">
                         <Image Source="/Resource/Image/settings.png" Height="17" Width="33" OpacityMask="White" Margin="10,0,0,0" />
-                        <Label Content="Settings" FontFamily="Script MT Bold" Foreground="White" Margin="-5,0,0,0" FontSize="14" />
+                        <Label x:Name="tbNewDiaryFilter" Content="New Diary (Default)" FontFamily="Script MT Bold" Foreground="White" Margin="-5,0,0,0" FontSize="14" />
                     </StackPanel>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Cursor="Hand">
+                <Border x:Name="btnFilterOldDiary" BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Width="208" Cursor="Hand" MouseLeftButtonUp="btnFilter_MouseLeftButtonUp">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#99BFB1B1"/>
@@ -102,12 +102,12 @@
                     </Border.Background>
                     <StackPanel Height="24" Width="226" HorizontalAlignment="Center" Orientation="Horizontal" Canvas.Top="52" VerticalAlignment="Top">
                         <Image Source="/Resource/Image/notification.png" Height="17" Width="33" OpacityMask="White" Margin="10,0,0,0" />
-                        <Label Content="Notification" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
+                        <Label x:Name="tbOldDiaryFilter" Content="Old Diary" FontFamily="Script MT Bold" Foreground="White" FontSize="14" Margin="-5,0,0,0" />
                     </StackPanel>
                 </Border>
                 <Label Content="Diary Tags" Canvas.Top="306" Foreground="White" FontFamily="Script MT Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,6"/>
 
-                <ScrollViewer Width="208" Height="268" Canvas.Top="335" Canvas.Left="8" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalScrollBarVisibility="Hidden">
+                <ScrollViewer Width="208" Height="366" Canvas.Top="335" Canvas.Left="8" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalScrollBarVisibility="Hidden">
                     <ItemsControl Name="tagLists" ItemsSource="{Binding Tags}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -130,7 +130,7 @@
 
             </StackPanel>
             <Canvas>
-                <Border CornerRadius="8" BorderThickness="2,2,2,2" Height="544" Width="1030" HorizontalAlignment="Left" Canvas.Top="10" VerticalAlignment="Center" Canvas.Left="10">
+                <Border CornerRadius="8" BorderThickness="2,2,2,2" Height="650" Width="1340" HorizontalAlignment="Left" Canvas.Top="10" VerticalAlignment="Center" Canvas.Left="10">
                     <Border.BorderBrush>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFC3A9A9"/>
@@ -144,10 +144,10 @@
                             <GradientStop Color="#99382828" Offset="0.3"/>
                         </LinearGradientBrush>
                     </Border.Background>
-                    <Canvas Margin="0,46,0,492" RenderTransformOrigin="0.5,0.5" Background="#FFFBFBFB" HorizontalAlignment="Center" Width="1030">
+                    <Canvas Margin="0,44,0,601" RenderTransformOrigin="0.5,0.5" Background="#FFFBFBFB" HorizontalAlignment="Center" Width="1326">
                         <Canvas.RenderTransform>
                             <TransformGroup>
-                                <ScaleTransform ScaleY="-1"/>
+                                <ScaleTransform ScaleY="1"/>
                                 <SkewTransform/>
                                 <RotateTransform/>
                                 <TranslateTransform/>
@@ -159,11 +159,11 @@
                     <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" Margin="7,5,0,5" HorizontalAlignment="Left" Width="351">
                         <StackPanel Width="352" HorizontalAlignment="Center" Orientation="Horizontal">
                             <Image Source="/Resource/Image/search.png" Height="20" Width="42" OpacityMask="White" />
-                            <TextBox x:Name="txtSearch" Text="SearchHere" Width="305" Background="{x:Null}" BorderBrush="White" Foreground="White" FontFamily="Script MT Bold" BorderThickness="1,0,0,0" Height="14" VerticalAlignment="Center"/>
+                            <TextBox x:Name="txtSearch" Width="305" Background="{x:Null}" BorderBrush="White" Foreground="White" FontFamily="Script MT Bold" BorderThickness="1,0,0,0" Height="14" VerticalAlignment="Center" TextChanged="txtSearch_TextChanged"/>
                         </StackPanel>
                     </Border>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="119" Canvas.Left="824" Canvas.Top="19" VerticalAlignment="Center">
+                <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="119" Canvas.Left="1127" Canvas.Top="23" VerticalAlignment="Top">
                     <Border.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#99D7E4E4"/>
@@ -173,7 +173,7 @@
                     </Border.Background>
                     <Button x:Name="btnAddMemo" Content="Add Memo" FontFamily="Script MT Bold" Foreground="White" FontSize="16" Canvas.Left="854" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnAddMemo_Click" Cursor="Hand"/>
                 </Border>
-                <Border Height="34" Width="38" CornerRadius="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="992" Cursor="Hand" Canvas.Top="17" >
+                <Border Height="34" Width="38" CornerRadius="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="1292" Cursor="Hand" Canvas.Top="19" >
                     <Grid>
                         <Ellipse Width="34" Height="34" Fill="#B2B39595" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="21" Canvas.Top="11" Margin="2,0,0,0"/>
                         <Image x:Name="imgAvatar" Width="30" Height="30"  Source="{Binding MemoAttachments}" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,2,0,0">
@@ -183,10 +183,10 @@
                         </Image>
                     </Grid>
                 </Border>
-                <Image Height="22" Width="24" Canvas.Left="964" Canvas.Top="22" Source="/Resource/Image/request.png" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Border BorderThickness="0,0,2,0" BorderBrush="#FFE0D0D0" Canvas.Left="15" Canvas.Top="64" HorizontalAlignment="Left" VerticalAlignment="Center" Width="358" CornerRadius="8,8,8,8">
-                    <WrapPanel Height="482" Width="356" Canvas.Left="17" Canvas.Top="64" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <ScrollViewer Width="356" Height="482" Canvas.Top="335" Canvas.Left="8" HorizontalAlignment="Center" VerticalScrollBarVisibility="Hidden">
+                <Image Height="22" Width="24" Canvas.Left="1259" Canvas.Top="25" Source="/Resource/Image/request.png" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Border BorderThickness="0,0,2,0" BorderBrush="#FFE0D0D0" Canvas.Left="15" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Top" Width="358" CornerRadius="8,8,8,8" Height="590">
+                    <WrapPanel Height="590" Width="356" Canvas.Left="17" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ScrollViewer Width="356" Height="584" Canvas.Top="335" Canvas.Left="8" HorizontalAlignment="Center" VerticalScrollBarVisibility="Hidden">
                             <ItemsControl Name="memoList">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate x:Name="dataTemplateMemo">
@@ -227,17 +227,9 @@
                         </ScrollViewer>
                     </WrapPanel>
                 </Border>
-                <Border x:Name="trueDiary" Canvas.Left="378" Canvas.Top="66" Height="478" Width="652" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#B5000000" BorderBrush="#FFFBFBFB" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Visibility="Hidden">
-                    <Canvas Canvas.Left="378" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="662" Height="468">
-                        <Border Height="38" Width="622" Canvas.Left="18" Canvas.Top="13" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" CornerRadius="8,8,8,8" Background="#FFA49A9A" BorderBrush="#FFC7BBBB" BorderThickness="2,2,2,2" Padding="4,4,4,4" Margin="0,0,5,0">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform AngleY="0.551"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform Y="0.49"/>
-                                </TransformGroup>
-                            </Border.RenderTransform>
+                <Border x:Name="trueDiary" Canvas.Left="378" Canvas.Top="66" Height="588" Width="962" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#B5000000" BorderBrush="#FFFBFBFB" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Visibility="Hidden">
+                    <Canvas Canvas.Left="378" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="942" Height="568">
+                        <Border Height="38" Width="904" Canvas.Left="18" Canvas.Top="14" RenderTransformOrigin="0,0" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="8,8,8,8" Background="#FFA49A9A" BorderBrush="#FFC7BBBB" BorderThickness="2,2,2,2" Padding="4,4,4,4">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Border BorderThickness="0,0,0.5,0" BorderBrush="#FFFDEEEE" Margin="0,0,5,0" Width="120">
                                     <Grid Height="26" Width="98">
@@ -308,7 +300,7 @@
                         </Border>
                         <Image Height="32" Width="42" Canvas.Left="16" Canvas.Top="62" Source="/Resource/Icon/tagging.png" OpacityMask="#FFC17F7F" HorizontalAlignment="Center" VerticalAlignment="Top" />
                         <Label Height="32" Width="252" Canvas.Left="58" Canvas.Top="62" Content="Seogire" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFF9F9F9" FontFamily="Script MT Bold" FontSize="18" />
-                        <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="119" Canvas.Left="516" Canvas.Top="69" VerticalAlignment="Top">
+                        <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="119" Canvas.Left="803" Canvas.Top="69" VerticalAlignment="Center">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#99D7E4E4"/>
@@ -318,7 +310,7 @@
                             </Border.Background>
                             <Button x:Name="btnSaveMemo" Content="Save" FontFamily="Script MT Bold" Foreground="White" FontSize="16" Canvas.Left="854" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnSaveMemo_Click" Cursor="Hand"/>
                         </Border>
-                        <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="119" Canvas.Left="384" Canvas.Top="69" VerticalAlignment="Center">
+                        <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="120" Canvas.Left="664" Canvas.Top="69" VerticalAlignment="Center">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#99D7E4E4"/>
@@ -328,7 +320,7 @@
                             </Border.Background>
                             <Button x:Name="btnDeleteMemo" Content="Delete" FontFamily="Script MT Bold" Foreground="White" FontSize="16" Canvas.Left="854" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnDeleteMemo_Click" Cursor="Hand"/>
                         </Border>
-                        <ScrollViewer Canvas.Left="21" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" Width="631" Height="348" VerticalScrollBarVisibility="Hidden">
+                        <ScrollViewer Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" Width="942" Height="459" VerticalScrollBarVisibility="Hidden">
                             <StackPanel x:Name="diaryBox">
                                 <RichTextBox Style="{StaticResource CustomRichTextBoxStyle}" x:Name="rtbTitle" Margin="10" VerticalScrollBarVisibility="Auto" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" GotKeyboardFocus="rtbDescription_PreviewGotKeyboardFocus" LostKeyboardFocus="rtbDescription_PreviewLostKeyboardFocus">
                                     <FlowDocument>
@@ -348,16 +340,16 @@
                         </ScrollViewer>
                     </Canvas>
                 </Border>
-                <Border x:Name="emptyDiary" Canvas.Left="378" Canvas.Top="66" Height="478" Width="652" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#B5000000" BorderBrush="#FFFBFBFB" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
-                    <Canvas Canvas.Left="378" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="662" Height="468">
-                        <Grid Canvas.Left="206" Canvas.Top="46" Height="230" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Border x:Name="emptyDiary" Canvas.Top="66" Width="962" Height="588" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#B5000000" BorderBrush="#FFFBFBFB" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Canvas.Left="378">
+                    <Canvas Canvas.Left="378" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="932" Height="568">
+                        <Grid Canvas.Left="341" Canvas.Top="96" Height="230" Width="250" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Image Width="250" Height="230" Source="/Resource/Image/theMokoko.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Image.Clip>
                                     <EllipseGeometry RadiusX="100" RadiusY="100" Center="120,130"/>
                                 </Image.Clip>
                             </Image>
                         </Grid>
-                        <TextBlock Height="103" Width="642" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="304" Text="Currently, Mokoko sees that you haven't chosen or written a diary yet. Mokoko is really sad about that. Please try to develop a habit of writing a diary for yourself." Foreground="White" FontFamily="Script MT Bold" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" Canvas.Left="10" />
+                        <TextBlock Height="103" Width="912" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="360" Text="Currently, Mokoko sees that you haven't chosen or written a diary yet. Mokoko is really sad about that. Please try to develop a habit of writing a diary for yourself." Foreground="White" FontFamily="Script MT Bold" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" Canvas.Left="10" />
                     </Canvas>
                 </Border>
 
