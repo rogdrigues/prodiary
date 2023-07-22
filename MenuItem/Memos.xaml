@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProDiaryApplication.MenuItem"
         mc:Ignorable="d"
-        Title="PiligonDiary" Height="600" Width="1300" Icon="/Resource/Image/iconImage.jpg" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" ShowInTaskbar="False" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="PiligonDiary" Height="600" Width="1300" Icon="/Resource/Image/iconImage.jpg" WindowStyle="ThreeDBorderWindow" ResizeMode="CanMinimize" ShowInTaskbar="False" Closed="Window_Closed" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
     <Window.Background>
         <ImageBrush x:Name="windowBG" ImageSource="/Resource/Theme/Diary_in_the_night03.jpg"/>
     </Window.Background>
+
     <Window.Resources>
         <Style TargetType="RichTextBox" x:Key="CustomRichTextBoxStyle">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="CaretBrush" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
+        <local:ByteArrayToImageSourceConverter x:Name="binaryConverter" x:Key="byteToImageConverter"/>
     </Window.Resources>
     <Grid>
         <DockPanel LastChildFill="True" Height="564" VerticalAlignment="Center" HorizontalAlignment="Center" Width="1280">
@@ -174,7 +176,7 @@
                 <Border Height="34" Width="38" CornerRadius="20,20,20,20" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="992" Cursor="Hand" Canvas.Top="17" >
                     <Grid>
                         <Ellipse Width="34" Height="34" Fill="#B2B39595" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="21" Canvas.Top="11" Margin="2,0,0,0"/>
-                        <Image x:Name="imgAvatar" Width="30" Height="30" Source="/Resource/Image/iconImage.jpg" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,2,0,0">
+                        <Image x:Name="imgAvatar" Width="30" Height="30"  Source="{Binding MemoAttachments}" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,2,0,0">
                             <Image.Clip>
                                 <EllipseGeometry RadiusX="15" RadiusY="15" Center="15,15"/>
                             </Image.Clip>
@@ -188,8 +190,9 @@
                             <ItemsControl Name="memoList">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderThickness="1" BorderBrush="White" CornerRadius="5" Height="89" Background="#FFD6C2C2" Width="352" Cursor="Hand" Margin="0,0,0,15">
+                                        <Border BorderThickness="1" BorderBrush="White" CornerRadius="5" Height="89" Background="#FFD6C2C2" Width="352" Cursor="Hand" Margin="0,0,0,15" PreviewMouseDown="MemoBorder_PreviewMouseDown">
                                             <Canvas HorizontalAlignment="Center" Width="352" Height="88" VerticalAlignment="Center">
+                                                <TextBlock x:Name="lblHidden" Visibility="Hidden" TextTrimming="CharacterEllipsis" Text="{Binding MemoId}" FontFamily="Script MT Bold" Foreground="#FFFDF8F8" FontSize="18" Width="260" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
                                                 <TextBlock x:Name="lblLabel" TextTrimming="CharacterEllipsis" Text="{Binding MemoTitle}" FontFamily="Script MT Bold" Foreground="#FFFDF8F8" FontSize="18" Width="260" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
                                                 <Grid Canvas.Left="275" Canvas.Top="11" Height="66" Width="72" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                     <Border Width="72" CornerRadius="20,20,20,20" HorizontalAlignment="Center" Cursor="Hand">
@@ -203,7 +206,7 @@
                                                                 </TransformGroup>
                                                             </Grid.RenderTransform>
                                                             <Ellipse Width="72" Height="66" Fill="#B2B39595" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                            <Image x:Name="imgAvatar123" Width="60" Height="60" Source="/Resource/Image/iconImage.jpg" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Image x:Name="diaryPicture" Source="{Binding MemoAttachments, Converter={StaticResource byteToImageConverter}}" Width="60" Height="60" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                                 <Image.Clip>
                                                                     <EllipseGeometry RadiusX="30" RadiusY="30" Center="30,30"/>
                                                                 </Image.Clip>
@@ -315,19 +318,29 @@
                             </Border.Background>
                             <Button x:Name="btnSaveMemo" Content="Save" FontFamily="Script MT Bold" Foreground="White" FontSize="16" Canvas.Left="854" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnSaveMemo_Click" Cursor="Hand"/>
                         </Border>
+                        <Border BorderThickness="1" BorderBrush="#FFFFF8F8" CornerRadius="5" HorizontalAlignment="Left" Width="119" Canvas.Left="384" Canvas.Top="69" VerticalAlignment="Center">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#99D7E4E4"/>
+                                    <GradientStop Color="#99B1CECE" Offset="1"/>
+                                    <GradientStop Color="#66ADC7C7" Offset="0.547"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Button x:Name="btnDeleteMemo" Content="Delete" FontFamily="Script MT Bold" Foreground="White" FontSize="16" Canvas.Left="854" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnDeleteMemo_Click" Cursor="Hand"/>
+                        </Border>
                         <ScrollViewer Canvas.Left="21" Canvas.Top="110" HorizontalAlignment="Center" VerticalAlignment="Top" Width="631" Height="348" VerticalScrollBarVisibility="Hidden">
                             <StackPanel x:Name="diaryBox">
                                 <RichTextBox Style="{StaticResource CustomRichTextBoxStyle}" x:Name="rtbTitle" Margin="10" VerticalScrollBarVisibility="Auto" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" GotKeyboardFocus="rtbDescription_PreviewGotKeyboardFocus" LostKeyboardFocus="rtbDescription_PreviewLostKeyboardFocus">
                                     <FlowDocument>
                                         <Paragraph>
-                                            <Run Text="Your title should be here." FontFamily="Script MT Bold" FontSize="24" Foreground="White"/>
+                                            <Run x:Name="rtbTitleRun" Text="Your title should be here." FontFamily="Script MT Bold" FontSize="24" Foreground="White"/>
                                         </Paragraph>
                                     </FlowDocument>
                                 </RichTextBox>
                                 <RichTextBox Style="{StaticResource CustomRichTextBoxStyle}" x:Name="rtbDescription" Margin="10" VerticalScrollBarVisibility="Auto" Background="{x:Null}" BorderBrush="{x:Null}"  GotKeyboardFocus="rtbDescription_PreviewGotKeyboardFocus" LostKeyboardFocus="rtbDescription_PreviewLostKeyboardFocus">
                                     <FlowDocument>
                                         <Paragraph>
-                                            <Run Text="This is where u should write some content. Maybe insert your image for better diary. Have a nice day" FontFamily="Script MT Bold" FontSize="16" Foreground="#FFB9B6B6"/>
+                                            <Run x:Name="rtbDescriptionRun" Text="This is where u should write some content. Maybe insert your image for better diary. Have a nice day" FontFamily="Script MT Bold" FontSize="16" Foreground="#FFB9B6B6"/>
                                         </Paragraph>
                                     </FlowDocument>
                                 </RichTextBox>
@@ -336,18 +349,6 @@
                     </Canvas>
                 </Border>
                 <Border x:Name="emptyDiary" Canvas.Left="378" Canvas.Top="66" Height="478" Width="652" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#B5000000" BorderBrush="#FFFBFBFB" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8">
-                    <Canvas Canvas.Left="378" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="662" Height="468">
-                        <Grid Canvas.Left="206" Canvas.Top="46" Height="230" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Image Width="250" Height="230" Source="/Resource/Image/theMokoko.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image.Clip>
-                                    <EllipseGeometry RadiusX="100" RadiusY="100" Center="120,130"/>
-                                </Image.Clip>
-                            </Image>
-                        </Grid>
-                        <TextBlock Height="103" Width="642" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="304" Text="Currently, Mokoko sees that you haven't chosen or written a diary yet. Mokoko is really sad about that. Please try to develop a habit of writing a diary for yourself." Foreground="White" FontFamily="Script MT Bold" FontSize="22" TextWrapping="Wrap" TextAlignment="Center" Canvas.Left="10" />
-                    </Canvas>
-                </Border>
-                <Border x:Name="existDiary" Canvas.Left="378" Canvas.Top="66" Height="478" Width="652" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#B5000000" BorderBrush="#FFFBFBFB" BorderThickness="1,1,1,1" CornerRadius="8,8,8,8" Visibility="Hidden">
                     <Canvas Canvas.Left="378" Canvas.Top="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="662" Height="468">
                         <Grid Canvas.Left="206" Canvas.Top="46" Height="230" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top">
                             <Image Width="250" Height="230" Source="/Resource/Image/theMokoko.png" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center">
