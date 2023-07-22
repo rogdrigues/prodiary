@@ -189,7 +189,7 @@
                         <ScrollViewer Width="356" Height="482" Canvas.Top="335" Canvas.Left="8" HorizontalAlignment="Center" VerticalScrollBarVisibility="Hidden">
                             <ItemsControl Name="memoList">
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
+                                    <DataTemplate x:Name="dataTemplateMemo">
                                         <Border BorderThickness="1" BorderBrush="White" CornerRadius="5" Height="89" Background="#FFD6C2C2" Width="352" Cursor="Hand" Margin="0,0,0,15" PreviewMouseDown="MemoBorder_PreviewMouseDown">
                                             <Canvas HorizontalAlignment="Center" Width="352" Height="88" VerticalAlignment="Center">
                                                 <TextBlock x:Name="lblHidden" Visibility="Hidden" TextTrimming="CharacterEllipsis" Text="{Binding MemoId}" FontFamily="Script MT Bold" Foreground="#FFFDF8F8" FontSize="18" Width="260" HorizontalAlignment="Left" Canvas.Left="10" VerticalAlignment="Center"/>
