@@ -40,27 +40,34 @@ namespace ProDiaryApplication
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(fullName))
                 {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please enter all required information.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$";
                 if (!Regex.IsMatch(password, passwordPattern))
                 {
-                    MessageBox.Show("Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ cái viết thường, một chữ cái viết hoa và một số", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Password must have at least 8 characters, including at least one lowercase letter, one uppercase letter, and one digit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
                 if (!Regex.IsMatch(email, emailPattern))
                 {
-                    MessageBox.Show("Email không đúng định dạng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid email format.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 if (imgAvatar.Source == null)
                 {
-                    MessageBox.Show("Vui lòng chọn Avatar", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please select an Avatar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                bool isEmailExist = context.Accounts.Any(a => a.Email == email);
+                if (isEmailExist)
+                {
+                    MessageBox.Show("Email does not exist.");
                     return;
                 }
 
@@ -86,7 +93,7 @@ namespace ProDiaryApplication
                 context.Accounts.Add(newAccount);
                 context.SaveChanges();
 
-                MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Registration successful.", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -106,7 +113,7 @@ namespace ProDiaryApplication
                 }
                 else
                 {
-                    MessageBox.Show("Bạn chưa chọn file ảnh", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("You haven't selected an image file.", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

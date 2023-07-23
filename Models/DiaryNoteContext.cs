@@ -23,6 +23,7 @@ namespace ProDiaryApplication.Models
         public virtual DbSet<MemoAddition> MemoAdditions { get; set; } = null!;
         public virtual DbSet<MemoTag> MemoTags { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
+        public virtual DbSet<VerificationCode> VerificationCodes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -115,6 +116,26 @@ namespace ProDiaryApplication.Models
                 entity.Property(e => e.TagId).HasColumnName("TagID");
 
                 entity.Property(e => e.TagName).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<VerificationCode>(entity =>
+            {
+                entity.HasKey(e => e.VerifyId)
+                    .HasName("PK__Verifica__0A2710A9BEADE697");
+
+                entity.ToTable("VerificationCode");
+
+                entity.Property(e => e.VerifyId).HasColumnName("VerifyID");
+
+                entity.Property(e => e.Code)
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Created)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Email).HasMaxLength(100);
             });
 
             OnModelCreatingPartial(modelBuilder);
