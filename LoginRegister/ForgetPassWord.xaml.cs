@@ -88,6 +88,11 @@ namespace ProDiaryApplication.LoginRegister
                 noteContext.VerificationCodes.Add(verification);
                 noteContext.SaveChanges();
 
+                emailTransition.Background = null;
+                Color color = (Color)ColorConverter.ConvertFromString("#4C2A559A");
+                SolidColorBrush brush = new SolidColorBrush(color);
+                verifyTransition.Background = brush;
+
                 EmailPage.Visibility = Visibility.Hidden;
                 VerificationPage.Visibility = Visibility.Visible;
             }
@@ -116,6 +121,11 @@ namespace ProDiaryApplication.LoginRegister
 
                 noteContext.VerificationCodes.Remove(verification);
                 noteContext.SaveChanges();
+
+                verifyTransition.Background = null;
+                Color color = (Color)ColorConverter.ConvertFromString("#4C2A559A");
+                SolidColorBrush brush = new SolidColorBrush(color);
+                passwordTransition.Background = brush;
 
                 VerificationPage.Visibility = Visibility.Hidden;
                 PasswordPage.Visibility = Visibility.Visible;
