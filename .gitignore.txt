@@ -1,0 +1,12 @@
+# Ignore compiled files
+*.exe
+*.dll
+
+# Ignore logs directory
+logs/
+
+# Ignore Node.js modules
+node_modules/
+
+# Ignore Visual Studio Code workspace settings
+.vscode/

@@ -17,7 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Path = System.IO.Path;
-
+using ProDiaryApplication.MusicListening;
 namespace ProDiaryApplication
 {
     public partial class MainWindow : Window
@@ -210,6 +210,13 @@ namespace ProDiaryApplication
         private void mainWindow_Closed(object sender, EventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            MusicManagement songsPage = new MusicManagement();
+            this.Content = songsPage;
+
         }
     }
 }

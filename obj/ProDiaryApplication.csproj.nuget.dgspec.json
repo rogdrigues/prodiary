@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj": {}
+    "C:\\Study\\ChuyenNghanhKy7\\PRN211\\GroupProject\\prodiary\\ProDiaryApplication.csproj": {}
   },
   "projects": {
-    "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj": {
+    "C:\\Study\\ChuyenNghanhKy7\\PRN211\\GroupProject\\prodiary\\ProDiaryApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj",
+        "projectUniqueName": "C:\\Study\\ChuyenNghanhKy7\\PRN211\\GroupProject\\prodiary\\ProDiaryApplication.csproj",
         "projectName": "ProDiaryApplication",
-        "projectPath": "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\FinalProjectPRN\\ProDiaryApplication\\obj\\",
+        "projectPath": "C:\\Study\\ChuyenNghanhKy7\\PRN211\\GroupProject\\prodiary\\ProDiaryApplication.csproj",
+        "packagesPath": "C:\\Users\\quans\\.nuget\\packages\\",
+        "outputPath": "C:\\Study\\ChuyenNghanhKy7\\PRN211\\GroupProject\\prodiary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\quans\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "MahApps.Metro.IconPacks": {
+              "target": "Package",
+              "version": "[4.11.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -80,7 +84,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
