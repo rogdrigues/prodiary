@@ -19,6 +19,9 @@
     <Compile Update="MenuItem\Memos.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MenuItem\UserProfile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginRegister\ForgetPassWord.xaml">
@@ -37,6 +40,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MenuItem\Memos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MenuItem\UserProfile.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
