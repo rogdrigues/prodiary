@@ -13,10 +13,14 @@
     <None Remove="MenuItem\82780939_p0.jpg" />
     <None Remove="Resource\Icon\align-left.png" />
     <None Remove="Resource\Icon\align-right.png" />
+    <None Remove="Resource\Icon\ArrowIcon.png" />
     <None Remove="Resource\Icon\bold.png" />
     <None Remove="Resource\Icon\copy.png" />
     <None Remove="Resource\Icon\cutting.png" />
     <None Remove="Resource\Icon\decrease-font-size.png" />
+    <None Remove="Resource\Icon\forget_changepw.png" />
+    <None Remove="Resource\Icon\forget_home.png" />
+    <None Remove="Resource\Icon\forget_send.png" />
     <None Remove="Resource\Icon\format.png" />
     <None Remove="Resource\Icon\forward.png" />
     <None Remove="Resource\Icon\image.png" />
@@ -45,10 +49,13 @@
     <None Remove="Resource\Image\tool.png" />
     <None Remove="Resource\Image\trash.png" />
     <None Remove="Resource\Theme\Diary_in_the_night03.jpg" />
+    <None Remove="Resource\Theme\Sunshine_in_the_village04.jpg" />
+    <None Remove="Resource\Theme\The_campfire_in_the_night05.jpg" />
     <None Remove="Resource\Theme\The_night_in_the_colesium02.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -59,6 +66,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="MimeKit" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,10 +78,14 @@
   <ItemGroup>
     <Resource Include="Resource\Icon\align-left.png" />
     <Resource Include="Resource\Icon\align-right.png" />
+    <Resource Include="Resource\Icon\ArrowIcon.png" />
     <Resource Include="Resource\Icon\bold.png" />
     <Resource Include="Resource\Icon\copy.png" />
     <Resource Include="Resource\Icon\cutting.png" />
     <Resource Include="Resource\Icon\decrease-font-size.png" />
+    <Resource Include="Resource\Icon\forget_changepw.png" />
+    <Resource Include="Resource\Icon\forget_home.png" />
+    <Resource Include="Resource\Icon\forget_send.png" />
     <Resource Include="Resource\Icon\format.png" />
     <Resource Include="Resource\Icon\forward.png" />
     <Resource Include="Resource\Icon\image.png" />
@@ -104,6 +116,8 @@
     <Resource Include="Resource\Image\settings.png" />
     <Resource Include="Resource\Image\tool.png" />
     <Resource Include="Resource\Theme\Diary_in_the_night03.jpg" />
+    <Resource Include="Resource\Theme\Sunshine_in_the_village04.jpg" />
+    <Resource Include="Resource\Theme\The_campfire_in_the_night05.jpg" />
     <Resource Include="Resource\Theme\The_night_in_the_colesium02.png" />
   </ItemGroup>
 
