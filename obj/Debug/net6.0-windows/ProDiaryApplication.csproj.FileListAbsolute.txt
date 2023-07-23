@@ -69,3 +69,13 @@ D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\ProDiaryApplicat
 D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\ProDiaryApplication.genruntimeconfig.cache
 D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\ref\ProDiaryApplication.dll
 D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\LoginRegister\ForgetPassWord.g.cs
+D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\LoginRegister\ForgetPassWord.baml
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\BouncyCastle.Cryptography.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\MailKit.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\MimeKit.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\System.Formats.Asn1.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\System.Security.Cryptography.Pkcs.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\System.Text.Encoding.CodePages.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\FinalProjectPRN\ProDiaryApplication\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

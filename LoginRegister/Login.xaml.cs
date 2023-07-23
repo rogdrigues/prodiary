@@ -1,4 +1,5 @@
-﻿using ProDiaryApplication.Models;
+﻿using ProDiaryApplication.LoginRegister;
+using ProDiaryApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,8 @@ namespace ProDiaryApplication
 
         private void btnShowReset_Click(object sender, RoutedEventArgs e)
         {
-
+            ForgetPassWord forgetPage = new ForgetPassWord();
+            forgetPage.Show();
         }
 
         private void btnShowRegister_Click(object sender, RoutedEventArgs e)
@@ -52,14 +54,14 @@ namespace ProDiaryApplication
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
                 {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Please enter all required information.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 Account account = context.Accounts.FirstOrDefault(a => a.Username == username && a.Password == password);
                 if (account == null)
                 {
-                    MessageBox.Show("Tài khoản hoặc mật khẩu không đúng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid username or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
