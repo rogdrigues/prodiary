@@ -1,0 +1,42 @@
+﻿<Page x:Class="ProDiaryApplication.UserControls.PopularSong"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="PopularSong"
+      Width="280"
+      Height="80"
+      >
+
+    <Border x:Name="border" CornerRadius="30" Padding="10" Margin="0 7">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="#ecf4f0"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#03bf69"/>
+                    </Trigger>
+                    <DataTrigger Binding="{Binding ElementName=popularSong, Path=IsActive}" Value="True">
+                        <Setter Property="Background" Value="#1aab7a"/>
+
+                    </DataTrigger>
+                </Style.Triggers>
+                   
+            </Style>
+        </Border.Style>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="180"/>
+
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Ellipse Width="40" Height="40" Margin="0 0 20 0">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color='Red'/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock Text="{Binding ElementName=popularSong, Path=Title}" FontSize="16" FontWeight="SemiBold" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 0 2"/>
+            <TextBlock Text="{Binding ElementName=popularSong, Path=Author}" FontSize="14" FontWeight="SemiBold" Grid.Column="2" VerticalAlignment="Center" Margin="0 0 20 2" HorizontalAlignment="Right"/>
+
+        </Grid>
+    </Border>
+</Page>

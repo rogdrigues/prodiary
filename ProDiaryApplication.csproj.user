@@ -16,6 +16,18 @@
     <Compile Update="MenuItem\Memos.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MusicListening\MusicManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\PlayList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\PopularSong.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\SongItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginRegister\Register.xaml">
@@ -31,6 +43,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MenuItem\Memos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MusicListening\MusicManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\PlayList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\PopularSong.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\SongItem.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\
+C:\Study\ChuyenNghanhKy7\PRN211\GroupProject\prodiary\obj\Debug\net6.0-windows\
 ProDiaryApplication
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\FinalProjectPRN\ProDiaryApplication\App.xaml
-5-35568136
+C:\Study\ChuyenNghanhKy7\PRN211\GroupProject\prodiary\App.xaml
+9999378199
 
-19-557145612
-221-1924900828
-LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\Memos.xaml;
+23473631654
+253-665027868
+LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\Memos.xaml;MusicListening\MusicManagement.xaml;UserControls\PlayList.xaml;UserControls\PopularSong.xaml;UserControls\SongItem.xaml;
 
 True
 
