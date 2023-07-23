@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\FinalProjectPRN\ProDiaryApplication\App.xaml
-6-194833025
+7-791645377
 
-20371122249
+21-458561381
 2241243277222
-LoginRegister\ForgetPassWord.xaml;LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\Memos.xaml;
+LoginRegister\ForgetPassWord.xaml;LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\Memos.xaml;MenuItem\UserProfile.xaml;
 
 False
 

@@ -27,6 +27,7 @@
     <None Remove="Resource\Icon\increase-font-size.png" />
     <None Remove="Resource\Icon\italic.png" />
     <None Remove="Resource\Icon\justification.png" />
+    <None Remove="Resource\Icon\logout.png" />
     <None Remove="Resource\Icon\paste.png" />
     <None Remove="Resource\Icon\tagging.png" />
     <None Remove="Resource\Icon\underline.png" />
@@ -51,6 +52,7 @@
     <None Remove="Resource\Theme\Diary_in_the_night03.jpg" />
     <None Remove="Resource\Theme\Sunshine_in_the_village04.jpg" />
     <None Remove="Resource\Theme\The_campfire_in_the_night05.jpg" />
+    <None Remove="Resource\Theme\The_cat_and_the_bed06.jpg" />
     <None Remove="Resource\Theme\The_night_in_the_colesium02.png" />
   </ItemGroup>
 
@@ -92,6 +94,7 @@
     <Resource Include="Resource\Icon\increase-font-size.png" />
     <Resource Include="Resource\Icon\italic.png" />
     <Resource Include="Resource\Icon\justification.png" />
+    <Resource Include="Resource\Icon\logout.png" />
     <Resource Include="Resource\Icon\paste.png" />
     <Resource Include="Resource\Icon\tagging.png" />
     <Resource Include="Resource\Icon\underline.png" />
@@ -118,6 +121,7 @@
     <Resource Include="Resource\Theme\Diary_in_the_night03.jpg" />
     <Resource Include="Resource\Theme\Sunshine_in_the_village04.jpg" />
     <Resource Include="Resource\Theme\The_campfire_in_the_night05.jpg" />
+    <Resource Include="Resource\Theme\The_cat_and_the_bed06.jpg" />
     <Resource Include="Resource\Theme\The_night_in_the_colesium02.png" />
   </ItemGroup>
 

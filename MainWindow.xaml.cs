@@ -220,5 +220,20 @@ namespace ProDiaryApplication
             memos.CurrentUser = CurrentUser;
             memos.Show();
         }
+
+        private void btnProfile_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            UserProfile profile = new UserProfile();
+            profile.CurrentUser = CurrentUser;
+            profile.Show();
+        }
+
+        private void btnLogout_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Login login = new Login();
+            CurrentUser = null;
+            login.Show();
+            this.Hide();
+        }
     }
 }
