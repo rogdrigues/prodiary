@@ -16,6 +16,15 @@
     <Compile Update="MenuItem\Memos.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MenuItem\Task.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\Item.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UserControls\MenuButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginRegister\Register.xaml">
@@ -31,6 +40,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MenuItem\Memos.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MenuItem\Task.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\Item.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\MenuButton.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

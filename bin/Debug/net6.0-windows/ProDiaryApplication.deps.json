@@ -8,14 +8,22 @@
     ".NETCoreApp,Version=v6.0": {
       "ProDiaryApplication/1.0.0": {
         "dependencies": {
+          "FontAwesome.WPF": "4.7.0.9",
           "Microsoft.EntityFrameworkCore.Design": "6.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.1",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.1",
-          "Microsoft.Extensions.Configuration.Json": "6.0.0",
-          "Wpf.Ui": "2.0.2.0"
+          "Microsoft.Extensions.Configuration.Json": "6.0.0"
         },
         "runtime": {
           "ProDiaryApplication.dll": {}
+        }
+      },
+      "FontAwesome.WPF/4.7.0.9": {
+        "runtime": {
+          "lib/net40/FontAwesome.WPF.dll": {
+            "assemblyVersion": "4.7.0.37774",
+            "fileVersion": "4.7.0.9"
+          }
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -494,14 +502,6 @@
         "dependencies": {
           "System.Drawing.Common": "4.7.0"
         }
-      },
-      "Wpf.Ui/2.0.2.0": {
-        "runtime": {
-          "Wpf.Ui.dll": {
-            "assemblyVersion": "2.0.2.0",
-            "fileVersion": "2.0.2.0"
-          }
-        }
       }
     }
   },
@@ -510,6 +510,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "FontAwesome.WPF/4.7.0.9": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SXE080rnyWMm9Dt0BZzMxh89/o9teuSaqL1N+0O/XM/F/HU8JuZA4XaEKxjBigwZPHHU3/udTa0QMYCHkmH43Q==",
+      "path": "fontawesome.wpf/4.7.0.9",
+      "hashPath": "fontawesome.wpf.4.7.0.9.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",
@@ -867,11 +874,6 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
-    },
-    "Wpf.Ui/2.0.2.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }
