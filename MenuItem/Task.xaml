@@ -7,8 +7,8 @@
         xmlns:us="clr-namespace:ProDiaryApplication.UserControls"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:ProDiaryApplication.UserControls"
-        FontFamily="Trebuchet MS" mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" 
-        AllowsTransparency="True" Background="Transparent" Height="590" Width="900">
+        FontFamily="Trebuchet MS" mc:Ignorable="d" WindowStartupLocation="CenterScreen" 
+        Background="Transparent" Height="590" Width="900">
 
     <Grid>
         <!--Grid Background-->
@@ -68,8 +68,7 @@
 
                 <TextBlock  Foreground="#C73F69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"
                            x:Name="txtMonth"  Text="{Binding CurrentMonth}"/>
-
-                <Calendar   CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" Height="332"/>
+                <Calendar   CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" Height="347" Width="485"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">
@@ -136,7 +135,7 @@
                 </Border>
 
 
-                
+
 
                 <ListView x:Name="listView" Height="323"  Background="#C14269">
                     <ListView.ItemTemplate>
@@ -146,9 +145,9 @@
 
                             <StackPanel Grid.Column="1" Margin="10 0" >
                                 <us:Item Title = "{Binding Title}" Time="{Binding Time, StringFormat='HH:mm'}" Color="{Binding Color}" Icon="{Binding Icon}" IconBell="{Binding IconBell}"/>
-                                
+
                             </StackPanel>
-                            
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

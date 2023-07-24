@@ -336,3 +336,42 @@ C:\Study\ChuyenNghanhKy7\PRN211\Project\prodiary\obj\Debug\net6.0-windows\MusicL
 C:\Study\ChuyenNghanhKy7\PRN211\Project\prodiary\obj\Debug\net6.0-windows\MusicListening\MyTextBox.g.cs
 C:\Study\ChuyenNghanhKy7\PRN211\Project\prodiary\obj\Debug\net6.0-windows\MusicListening\AddSongDialog.baml
 C:\Study\ChuyenNghanhKy7\PRN211\Project\prodiary\obj\Debug\net6.0-windows\MusicListening\MusicManagement.baml
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.BootstrapIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.BoxIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Codicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Coolicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Core.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Entypo.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.EvaIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.FeatherIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.FileIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.FontAwesome.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Fontaudio.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Fontisto.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.ForkAwesome.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Ionicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.JamIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Material.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.MaterialDesign.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.MaterialLight.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Microns.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Modern.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Octicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.PicolIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.PixelartIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.RPGAwesome.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.RadixIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.RemixIcon.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.SimpleIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Typicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Unicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.VaadinIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.WeatherIcons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.Zondicons.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\bin\Debug\net6.0-windows\MahApps.Metro.IconPacks.dll
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\MusicListening\MyTextBox.baml
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\MusicListening\AddSongDialog.g.cs
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\MusicListening\MusicManagement.g.cs
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\MusicListening\MyTextBox.g.cs
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\MusicListening\AddSongDialog.baml
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\MusicListening\MusicManagement.baml
