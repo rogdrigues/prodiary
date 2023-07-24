@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace ProDiaryApplication.Models
 {
@@ -23,15 +21,16 @@ namespace ProDiaryApplication.Models
         public virtual DbSet<MemoAddition> MemoAdditions { get; set; } = null!;
         public virtual DbSet<MemoTag> MemoTags { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
+        public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<VerificationCode> VerificationCodes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                                          .SetBasePath(Directory.GetCurrentDirectory())
-                                          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("MyCnn"));
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=localhost;database=DiaryNote;uid=sa;pwd=sa;TrustServerCertificate=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -85,7 +84,7 @@ namespace ProDiaryApplication.Models
                 entity.HasOne(d => d.Memo)
                     .WithMany(p => p.MemoAdditions)
                     .HasForeignKey(d => d.MemoId)
-                    .HasConstraintName("FK__MemoAddit__MemoI__5CD6CB2B");
+                    .HasConstraintName("FK__MemoAddit__MemoI__2B3F6F97");
             });
 
             modelBuilder.Entity<MemoTag>(entity =>
@@ -101,12 +100,12 @@ namespace ProDiaryApplication.Models
                 entity.HasOne(d => d.Memo)
                     .WithMany()
                     .HasForeignKey(d => d.MemoId)
-                    .HasConstraintName("FK__MemoTag__MemoID__4E88ABD4");
+                    .HasConstraintName("FK__MemoTag__MemoID__34C8D9D1");
 
                 entity.HasOne(d => d.Tag)
                     .WithMany()
                     .HasForeignKey(d => d.TagId)
-                    .HasConstraintName("FK__MemoTag__TagID__4F7CD00D");
+                    .HasConstraintName("FK__MemoTag__TagID__35BCFE0A");
             });
 
             modelBuilder.Entity<Tag>(entity =>
@@ -118,10 +117,38 @@ namespace ProDiaryApplication.Models
                 entity.Property(e => e.TagName).HasMaxLength(255);
             });
 
+            modelBuilder.Entity<Task>(entity =>
+            {
+                entity.HasKey(e => e.TaskId)
+                    .HasName("PK__Task__7C6949D1AF37F02F");
+
+                entity.ToTable("Task");
+
+                entity.Property(e => e.TaskId).HasColumnName("TaskID");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.TaskBegin).HasColumnType("datetime");
+
+                entity.Property(e => e.TaskDate).HasColumnType("datetime");
+
+                entity.Property(e => e.TaskEnd).HasColumnType("datetime");
+
+                entity.Property(e => e.TaskStatus).HasMaxLength(255);
+
+                entity.Property(e => e.TaskTitle).HasMaxLength(255);
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithMany(p => p.Tasks)
+                    .HasForeignKey(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Task__ID__2E1BDC42");
+            });
+
             modelBuilder.Entity<VerificationCode>(entity =>
             {
                 entity.HasKey(e => e.VerifyId)
-                    .HasName("PK__Verifica__0A2710A9BEADE697");
+                    .HasName("PK__Verifica__0A2710A9CD37FB23");
 
                 entity.ToTable("VerificationCode");
 

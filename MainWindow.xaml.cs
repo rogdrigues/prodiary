@@ -235,5 +235,12 @@ namespace ProDiaryApplication
             login.Show();
             this.Hide();
         }
+
+        private void StackPanel_MouseLeftButtonUpTasks(object sender, MouseButtonEventArgs e)
+        {
+            MenuItem.Task task = new MenuItem.Task();
+            task.CurrentUser = CurrentUser;
+            task.Show();
+        }
     }
 }

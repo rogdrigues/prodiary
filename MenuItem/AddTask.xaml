@@ -1,0 +1,38 @@
+﻿<Window x:Class="ProDiaryApplication.MenuItem.AddTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProDiaryApplication.MenuItem"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="AddTask" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Task Title:" Margin="20,2,-20,380" Grid.Row="1" Grid.RowSpan="5" />
+        <TextBox x:Name="txtTaskTitle" Grid.Row="1" Width="200" />
+
+        <TextBlock Text="Content" Margin="20,25,-20,323" Grid.Row="5" />
+        <TextBox x:Name="txtTaskContent" Grid.Row="5" Width="200" Margin="290,12,290,347" />
+
+        <TextBlock Text="Begin Time" Margin="20,73,628,304" Grid.Row="5" />
+        <xctk:TimePicker x:Name="tpBegin" Grid.Row="5" Format="Custom" FormatString="HH:mm" Margin="290,64,386,295" />
+        
+        <TextBlock Text="End Time:" Margin="20,112,624,249" Grid.Row="5" />
+        <xctk:TimePicker x:Name="tpEnd" Grid.Row="5" Format="Custom" FormatString="HH:mm" Margin="290,112,386,247" />
+        
+        <TextBlock Text="Ngày đến hạn:" Grid.Row="5" Margin="20,166,643,214" />
+        <DatePicker x:Name="dpDate" Grid.Row="5" Width="200" Margin="290,166,290,150" />
+
+        <Button Content="Thêm công việc" Grid.Row="5" Width="100" Click="AddTask_Click" Margin="569,215,111,85" />
+        
+    </Grid>
+</Window>
