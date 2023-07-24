@@ -3803,19 +3803,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\baqua\\.nuget\\packages\\": {}
+    "C:\\Users\\quans\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\ProDiaryApplication.csproj",
+      "projectUniqueName": "C:\\Study\\ChuyenNghanhKy7\\PRN211\\Project\\prodiary\\ProDiaryApplication.csproj",
       "projectName": "ProDiaryApplication",
-      "projectPath": "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\ProDiaryApplication.csproj",
-      "packagesPath": "C:\\Users\\baqua\\.nuget\\packages\\",
-      "outputPath": "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\obj\\",
+      "projectPath": "C:\\Study\\ChuyenNghanhKy7\\PRN211\\Project\\prodiary\\ProDiaryApplication.csproj",
+      "packagesPath": "C:\\Users\\quans\\.nuget\\packages\\",
+      "outputPath": "C:\\Study\\ChuyenNghanhKy7\\PRN211\\Project\\prodiary\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\baqua\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\quans\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
