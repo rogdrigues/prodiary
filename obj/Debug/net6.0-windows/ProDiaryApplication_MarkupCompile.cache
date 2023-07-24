@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\
+C:\Study\ChuyenNghanhKy7\PRN211\Project\prodiary\obj\Debug\net6.0-windows\
 ProDiaryApplication
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\FPT\SUM23\PRN221\Project\New folder\prodiary\App.xaml
-11912658004
+C:\Study\ChuyenNghanhKy7\PRN211\Project\prodiary\App.xaml
+141880785326
 
-26-1182580061
-229-445458280
-LoginRegister\ForgetPassWord.xaml;LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\AddTask.xaml;MenuItem\Memos.xaml;MenuItem\Task.xaml;MenuItem\UserProfile.xaml;UserControls\Item.xaml;UserControls\MenuButton.xaml;
+40-1524369302
+262966042903
+LoginRegister\ForgetPassWord.xaml;LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\AddTask.xaml;MenuItem\Memos.xaml;MenuItem\Task.xaml;MenuItem\UserProfile.xaml;MusicListening\AddSongDialog.xaml;MusicListening\MusicManagement.xaml;MusicListening\MyTextBox.xaml;UserControls\Item.xaml;UserControls\MenuButton.xaml;
 
 False
 

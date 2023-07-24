@@ -1,5 +1,6 @@
 ﻿using ProDiaryApplication.MenuItem;
 using ProDiaryApplication.Models;
+using ProDiaryApplication.MusicListening;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -241,6 +242,15 @@ namespace ProDiaryApplication
             MenuItem.Task task = new MenuItem.Task();
             task.CurrentUser = CurrentUser;
             task.Show();
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Height = 700;
+            this.Width = 1500;
+
+            MusicManagement songsPage = new MusicManagement(CurrentUser);
+            songsPage.ShowDialog();
+
         }
     }
 }
