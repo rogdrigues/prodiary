@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\FinalProjectPRN\ProDiaryApplication\obj\Debug\net6.0-windows\
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\obj\Debug\net6.0-windows\
 ProDiaryApplication
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\FinalProjectPRN\ProDiaryApplication\App.xaml
-7-791645377
+D:\FPT\SUM23\PRN221\Project\New folder\prodiary\App.xaml
+11912658004
 
-21-458561381
-2241243277222
-LoginRegister\ForgetPassWord.xaml;LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\Memos.xaml;MenuItem\UserProfile.xaml;
+26-1182580061
+229-445458280
+LoginRegister\ForgetPassWord.xaml;LoginRegister\Login.xaml;LoginRegister\Register.xaml;MainWindow.xaml;MenuItem\AboutUs.xaml;MenuItem\AddTask.xaml;MenuItem\Memos.xaml;MenuItem\Task.xaml;MenuItem\UserProfile.xaml;UserControls\Item.xaml;UserControls\MenuButton.xaml;
 
 False
 

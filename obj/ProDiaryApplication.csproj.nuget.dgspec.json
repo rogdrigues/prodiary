@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj": {}
+    "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\ProDiaryApplication.csproj": {}
   },
   "projects": {
-    "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj": {
+    "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\ProDiaryApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj",
+        "projectUniqueName": "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\ProDiaryApplication.csproj",
         "projectName": "ProDiaryApplication",
-        "projectPath": "D:\\FinalProjectPRN\\ProDiaryApplication\\ProDiaryApplication.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\FinalProjectPRN\\ProDiaryApplication\\obj\\",
+        "projectPath": "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\ProDiaryApplication.csproj",
+        "packagesPath": "C:\\Users\\baqua\\.nuget\\packages\\",
+        "outputPath": "D:\\FPT\\SUM23\\PRN221\\Project\\New folder\\prodiary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\baqua\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,14 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "FontAwesome.WPF": {
+              "target": "Package",
+              "version": "[4.7.0.9, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.1.0, )"
@@ -88,7 +96,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
