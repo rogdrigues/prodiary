@@ -1,0 +1,83 @@
+USE [master];
+GO
+
+IF DB_ID('DiaryNote') IS NOT NULL 
+BEGIN
+	ALTER DATABASE [DiaryNote] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE [DiaryNote];
+END
+CREATE DATABASE [DiaryNote];
+GO
+USE [DiaryNote];
+GO
+
+
+
+CREATE TABLE Account (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(100) NOT NULL,
+    Password NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100),
+    FullName NVARCHAR(100),
+    Avatar VARBINARY(MAX),
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Memo (
+    MemoID INT IDENTITY(1,1) PRIMARY KEY,
+    MemoTitle NVARCHAR(255) NOT NULL,
+    MemoContent NVARCHAR(MAX) NOT NULL,
+    MemoAttachments VARBINARY(MAX),
+    MemoCreated DATETIME DEFAULT GETDATE(),
+    MemoUpdated DATETIME DEFAULT GETDATE(),
+    MemoAuthor NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE MemoAddition(
+    MemoAdditionID INT IDENTITY(1,1) PRIMARY KEY,
+    MemoID INT FOREIGN KEY REFERENCES Memo(MemoID),
+    MemoAttachments VARBINARY(MAX),
+    MemoContentAddition NVARCHAR(MAX)
+);
+
+CREATE TABLE Task (
+    TaskID INT IDENTITY(1,1) PRIMARY KEY,
+    TaskTitle NVARCHAR(255) NOT NULL,
+    TaskContent NVARCHAR(MAX) NOT NULL,
+    TaskStatus NVARCHAR(255),
+	TaskDate DATETIME ,
+    TaskBegin DATETIME ,
+    TaskEnd DATETIME ,
+    ID INT NOT NULL,
+	FOREIGN KEY([ID])
+	REFERENCES ACCOUNT([ID])
+);
+
+CREATE TABLE Tag (
+    TagID INT IDENTITY(1,1) PRIMARY KEY,
+    TagName NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE VerificationCode(
+	VerifyID INT IDENTITY(1,1) PRIMARY KEY,
+	Email NVARCHAR(100) NOT NULL,
+	Code VARCHAR(6) NOT NULL,
+	Created DATETIME DEFAULT GETDATE(),
+)
+
+CREATE TABLE MemoTag (
+    MemoID INT,
+    TagID INT,
+    FOREIGN KEY (MemoID) REFERENCES Memo(MemoID),
+    FOREIGN KEY (TagID) REFERENCES Tag(TagID)
+);
+
+
+
+INSERT INTO Tag (TagName)
+VALUES
+    (N'Work'),
+    (N'Personal'),
+    (N'Family'),
+    (N'Travel'),
+    (N'Food')
