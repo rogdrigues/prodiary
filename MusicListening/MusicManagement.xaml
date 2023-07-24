@@ -140,19 +140,7 @@
             
             <Border Grid.Column="2" CornerRadius="0 40 0 0" Background="White" Margin="0,22,0,0">
                 
-                <StackPanel Margin="30 0 30 0">
-                    <Button x:Name="CloseButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"
-                Panel.ZIndex="1" Click="CloseButton_Click">
-                        <!-- Set a higher ZIndex value for the button -->
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <!-- Replace 'YourCloseButtonIcon' with the desired icon for the close button -->
-                                    <Icon:PackIconMaterial Kind="Close" Foreground="Black" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                <StackPanel Margin="30 30 30 0">
                     <TextBlock Text="Artists" Style="{StaticResource titleText}" Margin="0 0 0 10" FontSize="28"/>
                     <ListBox Name="artistsList" ItemsSource="{Binding artistsList}" Style="{StaticResource {x:Type ListBox}}" SelectionChanged="ListBoxArtists_SelectionChanged">
                         <ListBox.ItemTemplate >

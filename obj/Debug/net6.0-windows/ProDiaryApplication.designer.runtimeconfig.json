@@ -12,8 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\baqua\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\baqua\\.nuget\\packages"
+      "C:\\Users\\quans\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\quans\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
