@@ -6,33 +6,28 @@
         xmlns:local="clr-namespace:ProDiaryApplication.MenuItem"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="AddTask" Height="450" Width="800">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        Title="AddTask" Height="402" Width="545" WindowStartupLocation="CenterScreen" 
+         >
+    <Canvas Margin="0,0,0,-6" Background="#C14269">
 
-        <TextBlock Text="Task Title:" Margin="20,2,-20,380" Grid.Row="1" Grid.RowSpan="5" />
-        <TextBox x:Name="txtTaskTitle" Grid.Row="1" Width="200" />
 
-        <TextBlock Text="Content" Margin="20,25,-20,323" Grid.Row="5" />
-        <TextBox x:Name="txtTaskContent" Grid.Row="5" Width="200" Margin="290,12,290,347" />
+        <TextBlock Text="Task Title:" Foreground="#FFFFFF" Grid.Row="1" Grid.RowSpan="5" Canvas.Left="20" Canvas.Top="59" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="ADD TASK"  Grid.Row="1" Grid.RowSpan="5" Canvas.Left="193" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="173" FontSize="25" FontWeight="Bold" Foreground="Yellow"/>
+        <TextBox x:Name="txtTaskTitle" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="214" Height="28" Canvas.Top="58" />
 
-        <TextBlock Text="Begin Time" Margin="20,73,628,304" Grid.Row="5" />
-        <xctk:TimePicker x:Name="tpBegin" Grid.Row="5" Format="Custom" FormatString="HH:mm" Margin="290,64,386,295" />
-        
-        <TextBlock Text="End Time:" Margin="20,112,624,249" Grid.Row="5" />
-        <xctk:TimePicker x:Name="tpEnd" Grid.Row="5" Format="Custom" FormatString="HH:mm" Margin="290,112,386,247" />
-        
-        <TextBlock Text="Ngày đến hạn:" Grid.Row="5" Margin="20,166,643,214" />
-        <DatePicker x:Name="dpDate" Grid.Row="5" Width="200" Margin="290,166,290,150" />
+        <TextBlock Text="Content" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="107" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBox x:Name="txtTaskContent" Grid.Row="5" Width="204" HorizontalAlignment="Left" Canvas.Left="214" Canvas.Top="106" VerticalAlignment="Center" Height="27" />
 
-        <Button Content="Thêm công việc" Grid.Row="5" Width="100" Click="AddTask_Click" Margin="569,215,111,85" />
-        
-    </Grid>
+        <TextBlock Text="Begin Time" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="157" />
+        <xctk:TimePicker x:Name="tpBegin" Grid.Row="5" Format="Custom" FormatString="HH:mm" Canvas.Left="214" Canvas.Top="156" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="119" />
+
+        <TextBlock Text="End Time:" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <xctk:TimePicker x:Name="tpEnd" Grid.Row="5" Format="Custom" FormatString="HH:mm" Height="28" Canvas.Left="214" Canvas.Top="204" Width="119" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+        <TextBlock Text="Date:" Grid.Row="5" Foreground="#FFFFFF" Canvas.Left="20" Canvas.Top="254" />
+        <DatePicker x:Name="dpDate" Grid.Row="5" Width="202" HorizontalAlignment="Left" Canvas.Left="214" Canvas.Top="254" VerticalAlignment="Top" Height="28" />
+
+        <Button Content="Add" Grid.Row="5" Width="100" Click="AddTask_Click" Canvas.Left="193" Canvas.Top="309" />
+
+    </Canvas>
 </Window>
