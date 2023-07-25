@@ -110,7 +110,7 @@ namespace ProDiaryApplication.MenuItem {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;component/menuitem/edittask.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;V1.0.0.0;component/menuitem/edittask.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MenuItem\EditTask.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
