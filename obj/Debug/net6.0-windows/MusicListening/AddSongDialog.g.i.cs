@@ -135,7 +135,7 @@ namespace ProDiaryApplication.MusicListening {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;component/musiclistening/addsongdialog.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;V1.0.0.0;component/musiclistening/addsongdialog.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MusicListening\AddSongDialog.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -127,7 +127,7 @@ namespace ProDiaryApplication
 
             while (!string.IsNullOrEmpty(currentDirectory))
             {
-                if (Path.GetFileName(currentDirectory) == "ProDiaryApplication")
+                if (Path.GetFileName(currentDirectory) == "prodiary")
                 {
                     projectDirectory = currentDirectory;
                     break;

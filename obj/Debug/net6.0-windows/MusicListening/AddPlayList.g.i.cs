@@ -111,7 +111,7 @@ namespace ProDiaryApplication.MusicListening {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;component/musiclistening/addplaylist.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;V1.0.0.0;component/musiclistening/addplaylist.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MusicListening\AddPlayList.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

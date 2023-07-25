@@ -117,7 +117,7 @@ namespace ProDiaryApplication.MenuItem {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;component/menuitem/userprofile.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;V1.0.0.0;component/menuitem/userprofile.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MenuItem\UserProfile.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

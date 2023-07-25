@@ -6,13 +6,13 @@
       xmlns:local="clr-namespace:ProDiaryApplication.MusicListening"
       xmlns:uc="clr-namespace:ProDiaryApplication.UserControls"
       Background="Transparent"
-      Height="960"
+      Height="869"
       Width="1434"         
       Title="MusicManagement">
 
     <Border Background="White"  MouseDown="Border_MouseDown" >
 
-        <Grid Margin="0,0,0,-175">
+        <Grid Height="1111">
 
 
             <Grid.ColumnDefinitions>
@@ -24,7 +24,7 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="181"/>
+                <RowDefinition Height="86"/>
 
             </Grid.RowDefinitions>
             <Border Background="White" CornerRadius="40 0 0 40" Grid.ColumnSpan="2" Margin="0,0,572,0">
@@ -77,7 +77,7 @@
                 </StackPanel>
             </Border>
 
-            <StackPanel Grid.Column="1" Background="White" Margin="40 50 10 0" >
+            <StackPanel Grid.Column="1" Background="White" Margin="40,50,10,10" >
                 <TextBlock Text="Home" Style="{StaticResource titleText}" />
                 <Border CornerRadius="20" Margin="0 20 0 0">
                     <Border.Background>
@@ -230,7 +230,7 @@
                 </StackPanel>
 
             </Border>
-            <Border Grid.Column="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Margin="63,848,0,0">
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Margin="63,717,0,181">
                 <StackPanel Orientation="Horizontal">
                     <Ellipse Width="60" Height="60" Margin="30 0 0 0">
                         <Ellipse.Fill>

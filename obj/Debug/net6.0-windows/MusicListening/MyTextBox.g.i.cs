@@ -68,7 +68,7 @@ namespace ProDiaryApplication.MusicListening {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;component/musiclistening/mytextbox.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/ProDiaryApplication;V1.0.0.0;component/musiclistening/mytextbox.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\MusicListening\MyTextBox.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

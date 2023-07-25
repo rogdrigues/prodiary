@@ -56,7 +56,7 @@ namespace ProDiaryApplication.MenuItem
 
                 var context = new DiaryNoteContext();
 
-                var tasks = context.Tasks.FirstOrDefault(x => x.TaskTitle == "a");
+                var tasks = context.Tasks.FirstOrDefault(x => x.TaskTitle == "Thi FE");
 
                 tasks.TaskTitle = txtTaskTitle.Text;
                 tasks.TaskContent = txtTaskContent.Text;
