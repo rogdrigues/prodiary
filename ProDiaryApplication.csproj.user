@@ -16,6 +16,9 @@
     <Compile Update="MenuItem\AboutUs.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MenuItem\EditTask.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MenuItem\Memos.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MenuItem\AddTask.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MenuItem\EditTask.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MenuItem\Memos.xaml">

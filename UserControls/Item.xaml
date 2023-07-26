@@ -52,7 +52,7 @@
                 <StackPanel>
                     <local:MenuButton Icon="Check" Caption="Check" />
                     <local:MenuButton Icon="BellSlash" Caption="Mute"/>
-                    <local:MenuButton Icon="Pencil" Caption="Edit"/>
+                    <local:MenuButton Icon="Pencil" Caption="Edit" x:Name="btnUpdateTask" MouseDoubleClick="UpdateTask" />
                     <local:MenuButton Icon="Trash" Caption="Delete" MouseDoubleClick="Delete" x:Name="btnDelete"  />
 
                 </StackPanel>

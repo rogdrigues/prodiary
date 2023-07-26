@@ -37,11 +37,11 @@
                         <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angle}"/>
                     </Button>
 
-                    <Button Content="2020" x:Name="btn2020"  Style="{StaticResource button}"/>
-                    <Button Content="2021" x:Name="btn2021" Style="{StaticResource button}"/>
-                    <Button Content="2022" x:Name="btn2022" Style="{StaticResource button}" />
-                    <Button Content="2023" x:Name="btn2023" Style="{StaticResource button}"/>
-                    <Button Content="2024" x:Name="btn2024" Style="{StaticResource button}"/>
+                    <Button Content="2020" x:Name="btn2020"  Style="{StaticResource button}" Click="Button_Click_2020"/>
+                    <Button Content="2021" x:Name="btn2021" Style="{StaticResource button}" Click="Button_Click_2021"/>
+                    <Button Content="2022" x:Name="btn2022" Style="{StaticResource button}" Click="Button_Click_2022"/>
+                    <Button Content="2023" x:Name="btn2023" Style="{StaticResource button}" Click="Button_Click_2023"/>
+                    <Button Content="2024" x:Name="btn2024" Style="{StaticResource button}" Click="Button_Click_2024"/>
 
                     <Button Style="{StaticResource button}">
                         <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angle}"/>
@@ -49,26 +49,26 @@
                 </StackPanel>
 
                 <!--Month Selection-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="1" x:Name="btnM1" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="2" x:Name="btnM2" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="3" x:Name="btnM3" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="4" x:Name="btnM4" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="5" x:Name="btnM5" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="6" x:Name="btnM6" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="7" x:Name="btnM7" Style="{StaticResource buttonMonth}" />
-                    <Button Content="8" x:Name="btnM8" Style="{StaticResource buttonMonth}" />
-                    <Button Content="9" x:Name="btnM9" Style="{StaticResource buttonMonth}"/>
-                    <Button Content="10" x:Name="btnM10"  Style="{StaticResource buttonMonth}"/>
-                    <Button Content="11" x:Name="btnM11" Style="{StaticResource buttonMonth}" />
-                    <Button Content="12" x:Name="btnM12" Style="{StaticResource buttonMonth}"/>
+                <StackPanel x:Name="btnMonth"  Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="1" x:Name="btnM1" Style="{StaticResource buttonMonth}" Click="btnM1_Click"/>
+                    <Button Content="2" x:Name="btnM2" Style="{StaticResource buttonMonth}" Click="btnM2_Click"/>
+                    <Button Content="3" x:Name="btnM3" Style="{StaticResource buttonMonth}" Click="btnM3_Click"/>
+                    <Button Content="4" x:Name="btnM4" Style="{StaticResource buttonMonth}" Click="btnM4_Click"/>
+                    <Button Content="5" x:Name="btnM5" Style="{StaticResource buttonMonth}" Click="btnM5_Click"/>
+                    <Button Content="6" x:Name="btnM6" Style="{StaticResource buttonMonth}" Click="btnM6_Click"/>
+                    <Button Content="7" x:Name="btnM7" Style="{StaticResource buttonMonth}" Click="btnM7_Click" />
+                    <Button Content="8" x:Name="btnM8" Style="{StaticResource buttonMonth}" Click="btnM8_Click" />
+                    <Button Content="9" x:Name="btnM9" Style="{StaticResource buttonMonth}" Click="btnM9_Click"/>
+                    <Button Content="10" x:Name="btnM10"  Style="{StaticResource buttonMonth}" Click="btnM10_Click"/>
+                    <Button Content="11" x:Name="btnM11" Style="{StaticResource buttonMonth}" Click="btnM11_Click" />
+                    <Button Content="12" x:Name="btnM12" Style="{StaticResource buttonMonth}" Click="btnM12_Click"/>
                 </StackPanel>
 
                 <Separator Height="0.8" Background="#CACACA" Margin="30 10"/>
 
                 <TextBlock  Foreground="#C73F69" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"
                            x:Name="txtMonth"  Text="{Binding CurrentMonth}"/>
-                <Calendar   CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" Height="347" Width="485"/>
+                <Calendar  x:Name="clCalendar" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" Height="347" Width="485" SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1">

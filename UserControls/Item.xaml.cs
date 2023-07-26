@@ -86,12 +86,20 @@ namespace ProDiaryApplication.UserControls
             context.SaveChanges();
             Window window = Window.GetWindow(this);
             window.Close();
-            MenuItem.Task task = new MenuItem.Task();
-            task.Show();
+            MenuItem.Task task1 = new MenuItem.Task();
+            task1.Show();
             MessageBox.Show("Xoa thanh cong");
 
         }
+        
 
-       
+        private void UpdateTask(object sender, MouseButtonEventArgs e)
+        {
+            var context = new DiaryNoteContext();
+            var title = Title.ToString();
+            EditTask eTask = new EditTask();
+            eTask.a = title;
+            eTask.Show();
+        }
     }
 }

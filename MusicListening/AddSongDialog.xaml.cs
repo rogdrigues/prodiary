@@ -33,58 +33,6 @@ namespace ProDiaryApplication.MusicListening
             InitializeComponent();
             Author.ItemsSource = singers;
         }
-        public string TitleValue { get; set; }
-        public string TimeValue { get; set; }
-        public string ImageURLValue { get; set; }
-        public string LinkToFileValue { get; set; }
-        public int IDValue { get; set; }
-        public int? CategoryValue { get; set; }
-        public int? StatusValue { get; set; }
-        public int AuthorID { get; set; }
-
-        // AddSongDialog constructor
-        public AddSongDialog(Models.Account user, string title, string time, string imageURL, string linkToFile, int id, int? category, int status, int authorID)
-        {
-            CurrentUser = user;
-            TitleValue = title;
-            TimeValue = time;
-            ImageURLValue = imageURL;
-            LinkToFileValue = linkToFile;
-            IDValue = id;
-            CategoryValue = category;
-            StatusValue = status;
-            AuthorID = authorID;
-            InitializeComponent();
-            // Rest of your existing code
-        }
-        protected override void OnContentRendered(EventArgs e)
-        {
-            base.OnContentRendered(e);
-            var context = new CloneModels.DiaryNoteContext();
-            try
-            {
-                if (CategoryValue != null)
-                    Category.SelectedIndex = Convert.ToInt32(CategoryValue) - 1;
-                if (StatusValue != null)
-                    Status.SelectedIndex = Convert.ToInt32(StatusValue) - 1;
-                List<Singer> singers = context.Singers.ToList();
-                Author.ItemsSource = singers;
-                if (AuthorID != null)
-                {
-                    Singer defaultAuthor = context.Singers.FirstOrDefault(s => s.Id == AuthorID);
-                    if (defaultAuthor != null)
-                    {
-                        Author.SelectedItem = defaultAuthor;
-                    }
-                }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message);
-            }
-            
-        }
-
         public int ID { get; set; }
 
         private async void  chooseFileButton_Click(object sender, RoutedEventArgs e)
@@ -218,12 +166,6 @@ namespace ProDiaryApplication.MusicListening
                 context.SaveChanges();
                 MessageBox.Show("Song added/updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
-                var mainWindow = Application.Current.Windows.OfType<MusicManagement>().FirstOrDefault();
-                if (mainWindow != null)
-                {
-                    mainWindow.ReloadData();
-                }
-
             }
             catch (Exception ex)
             {
@@ -235,7 +177,6 @@ namespace ProDiaryApplication.MusicListening
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             this.Close();
         }
     }
