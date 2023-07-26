@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:uc="clr-namespace:ProDiaryApplication.MusicListening"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        Width="1150"  MinWidth="1150" Height="540" WindowStyle="None"
+        Width="1150"  MinWidth="1150" MinHeight="540" WindowStyle="None"
         WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent">
     <Border Grid.Row="1" Background="#F2F5F8" CornerRadius="0 0 0 5" >
         <Grid VerticalAlignment="Top"  Height="538">

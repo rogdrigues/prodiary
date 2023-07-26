@@ -13,21 +13,21 @@
 
         <TextBlock Text="Task Title:" Foreground="#FFFFFF" Grid.Row="1" Grid.RowSpan="5" Canvas.Left="20" Canvas.Top="59" HorizontalAlignment="Left" VerticalAlignment="Center" />
         <TextBlock Text="ADD TASK"  Grid.Row="1" Grid.RowSpan="5" Canvas.Left="193" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="173" FontSize="25" FontWeight="Bold" Foreground="Yellow"/>
-        <TextBox x:Name="txtTaskTitle" Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="214" Height="28" Canvas.Top="58" />
+        <TextBox x:Name="txtTaskTitle" Grid.Row="1" Width="208" HorizontalAlignment="Center" Canvas.Left="214" Height="34" Canvas.Top="58" Background="White"/>
 
         <TextBlock Text="Content" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="107" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBox x:Name="txtTaskContent" Grid.Row="5" Width="204" HorizontalAlignment="Left" Canvas.Left="214" Canvas.Top="106" VerticalAlignment="Center" Height="27" />
+        <TextBox x:Name="txtTaskContent" Grid.Row="5" Width="208" HorizontalAlignment="Center" Canvas.Left="214" Canvas.Top="106" Height="34" Background="White"/>
 
         <TextBlock Text="Begin Time" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="157" />
-        <xctk:TimePicker x:Name="tpBegin" Grid.Row="5" Format="Custom" FormatString="HH:mm" Canvas.Left="214" Canvas.Top="156" HorizontalAlignment="Center" Height="28" VerticalAlignment="Top" Width="119" />
+        <xctk:TimePicker x:Name="tpBegin" Grid.Row="5" Format="Custom" FormatString="HH:mm" Canvas.Left="214" Canvas.Top="156" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Width="119" />
 
-        <TextBlock Text="End Time:" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="204" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <xctk:TimePicker x:Name="tpEnd" Grid.Row="5" Format="Custom" FormatString="HH:mm" Height="28" Canvas.Left="214" Canvas.Top="204" Width="119" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <TextBlock Text="End Time:" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="22" Canvas.Top="202" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.812,0.861" />
+        <xctk:TimePicker x:Name="tpEnd" Grid.Row="5" Format="Custom" FormatString="HH:mm" Height="31" Canvas.Left="213" Canvas.Top="199" Width="119" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
-        <TextBlock Text="Date:" Grid.Row="5" Foreground="#FFFFFF" Canvas.Left="20" Canvas.Top="254" />
-        <DatePicker x:Name="dpDate" Grid.Row="5" Width="202" HorizontalAlignment="Left" Canvas.Left="214" Canvas.Top="254" VerticalAlignment="Top" Height="28" />
+        <TextBlock Text="Date:" Grid.Row="5" Foreground="#FFFFFF" Canvas.Left="22" Canvas.Top="250" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <DatePicker x:Name="dpDate" Grid.Row="5" Width="208" HorizontalAlignment="Left" Canvas.Left="213" Canvas.Top="249" VerticalAlignment="Top" Height="34" Background="White"  />
 
-        <Button Content="Add" Grid.Row="5" Width="100" Click="AddTask_Click" Canvas.Left="193" Canvas.Top="309" />
+        <Button Content="ADD" Grid.Row="5" Width="125" Click="AddTask_Click" Canvas.Left="193" Canvas.Top="309" FontWeight="Bold" Foreground="Yellow" Height="26" />
 
     </Canvas>
 </Window>

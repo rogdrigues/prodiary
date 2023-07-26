@@ -27,13 +27,13 @@ namespace ProDiaryApplication.MenuItem
             InitializeComponent();
             UpdateCurrentMonth();
             Loaded += MainWindow_Loaded;
-            LoadDataFromDatabase();
+            LoadDataFromDatabase(date);
             // Gán danh sách các mục từ cơ sở dữ liệu vào ListView
             listView.ItemsSource = itemList;
 
 
         }
-
+        DateTime date = DateTime.Today;
         public class Item
         {
             public string Title { get; set; }
@@ -43,7 +43,7 @@ namespace ProDiaryApplication.MenuItem
             public string IconBell { get; set; }
         }
         private List<Item> itemList = new List<Item>();
-        private void LoadDataFromDatabase()
+        private void LoadDataFromDatabase(DateTime today)
         {
             // Đoạn mã để truy vấn và lấy dữ liệu từ cơ sở dữ liệu
             // Ví dụ:
@@ -51,7 +51,8 @@ namespace ProDiaryApplication.MenuItem
 
             var context = new DiaryNoteContext();
             
-            var tasks = context.Tasks.ToList();
+            var tasks = context.Tasks.ToList().Where(x => x.TaskDate == today);
+            itemList.Clear();
             foreach (var task in tasks)
             {
                 itemList.Add(new Item
@@ -67,6 +68,7 @@ namespace ProDiaryApplication.MenuItem
             txtNumTask.Text = num + " tasks -" + " 2 dates left";
 
         }
+       
 
         public Account? CurrentUser { get; set; }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -128,21 +130,6 @@ namespace ProDiaryApplication.MenuItem
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void Border_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -180,16 +167,139 @@ namespace ProDiaryApplication.MenuItem
             AddTask task = new AddTask();
             task.CurrentUser = CurrentUser;
             task.Show();
+            
+            Window window = Window.GetWindow(this);
+            window.Close();
+            
         }
 
-        
+        private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime selectedDate = clCalendar.SelectedDate ?? DateTime.Today;
+            if (itemList != null)
+            {
+                LoadDataFromDatabase(selectedDate);
 
-        
+                listView.ItemsSource = null;
+                listView.ItemsSource = itemList;
+            }
+            
+
+        }
+        private void Button_Click_2020(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayYear(2020);
+        }
+
+        private void Button_Click_2021(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayYear(2021);
+        }
+
+        private void Button_Click_2022(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayYear(2022);
+        }
+        private void Button_Click_2023(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayYear(2023);
+        }
+        private void Button_Click_2024(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayYear(2024);
+        }
+
+        private void SetCalendarDisplayYear(int year)
+        {
+            // Kiểm tra xem năm có nằm trong khoảng hợp lệ của Calendar hay không (thay thế bằng khoảng năm bạn muốn hỗ trợ)
+            if (year >= 1900 && year <= 2100)
+            {
+                // Đặt năm hiển thị cho Calendar
+                clCalendar.DisplayDate = new DateTime(year, 1, 1);
+            }
+            else
+            {
+                // Xử lý khi năm không hợp lệ
+                // Ví dụ: Hiển thị thông báo lỗi
+            }
+        }
+        private void SetCalendarDisplayMonth(int month)
+        {
+            // Kiểm tra xem tháng có nằm trong khoảng hợp lệ của Calendar (1-12) hay không
+            if (month >= 1 && month <= 12)
+            {
+                // Lấy năm hiện tại từ Calendar
+                int currentYear = clCalendar.DisplayDate.Year;
+
+                // Đặt ngày hiển thị cho Calendar (ngày 1 của tháng được chọn)
+                clCalendar.DisplayDate = new DateTime(currentYear, month, 1);
+            }
+            else
+            {
+                
+            }
+        }
+
+        private void btnM7_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(7);
+        }
+
+        private void btnM6_Click(object sender, RoutedEventArgs e)
+        {
+           SetCalendarDisplayMonth(6);
+            
+        }
+
+        private void btnM1_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(1);
+        }
+
+        private void btnM2_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(2);
+        }
+
+        private void btnM3_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(3);
+        }
+
+        private void btnM4_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(4);
+        }
+
+        private void btnM5_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(5);
+        }
+
+        private void btnM8_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(8);
+        }
+
+        private void btnM9_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(9);
+        }
+
+        private void btnM10_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(10);
+        }
+
+        private void btnM11_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(11);
+        }
+
+        private void btnM12_Click(object sender, RoutedEventArgs e)
+        {
+            SetCalendarDisplayMonth(12);
+        }
     }
 }
 
-//< us:Item Title = "ahihi" Time="09:45 - 10:30" Color="#EBA5BB" Icon="CheckCircle" IconBell="BellSlash" Loaded="Item_Loaded" />
-//                <us:Item Title = "Quan Dai CA" Time="11:30 - 12:00" Color="#EBA5BB" Icon="CheckCircle" IconBell="BellSlash"/>
-//                <us:Item Title = "leu Leu" Time="14:00 - 15:30" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-//                <us:Item Title = "aaaaa" Time="20:15 - 21:45" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>
-//                <us:Item Title = "bbbbb" Time="23:00 - 23:20" Color="#f1f1f1" Icon="CircleThin" IconBell="Bell"/>

@@ -48,7 +48,11 @@ namespace ProDiaryApplication.MenuItem
                 context.Tasks.Add(task);
                 if (context.SaveChanges() > 0)
                 {
-                    System.Windows.MessageBox.Show("Add Employee Success");
+                    System.Windows.MessageBox.Show("Add Task Success");
+                    Window window = Window.GetWindow(this);
+                    window.Close();
+                    MenuItem.Task task1 = new MenuItem.Task();
+                    task1.Show();
                     
                 }
             }
