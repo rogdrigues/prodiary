@@ -5,6 +5,11 @@ namespace ProDiaryApplication.CloneModels
 {
     public partial class Song
     {
+        public Song()
+        {
+            PlayListSongs = new HashSet<PlayListSong>();
+        }
+
         public int Id { get; set; }
         public string? LinkToFile { get; set; }
         public string? LinkToWeb { get; set; }
@@ -18,5 +23,6 @@ namespace ProDiaryApplication.CloneModels
 
         public virtual Singer? AuthorNavigation { get; set; }
         public virtual Account? OwnerNavigation { get; set; }
+        public virtual ICollection<PlayListSong> PlayListSongs { get; set; }
     }
 }

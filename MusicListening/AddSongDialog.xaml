@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:uc="clr-namespace:ProDiaryApplication.MusicListening"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        Width="1150"  MinWidth="1150" MinHeight="540" WindowStyle="None"
+        Width="1150"  MinWidth="1150" Height="580" WindowStyle="None"
         WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent">
     <Border Grid.Row="1" Background="#F2F5F8" CornerRadius="0 0 0 5" >
-        <Grid VerticalAlignment="Top"  Height="538">
+        <Grid VerticalAlignment="Top"  Height="568">
             <!--Background Layers-->
             <Button x:Name="CloseButton" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" FontSize="16"
         Foreground="#374655" Background="Transparent" BorderBrush="Transparent" Click="CloseButton_Click"
@@ -20,7 +20,7 @@
                     <DropShadowEffect Direction="-130" BlurRadius="30" ShadowDepth="5" Opacity="0.1"/>
                 </Border.Effect>
 
-                <Grid Margin="20 0">
+                <Grid  Margin="20 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -41,7 +41,7 @@
                         <Border CornerRadius="50" BorderThickness="1.5" BorderBrush="#EFEFEF">
                             <Ellipse Width="40" Height="40">
                                 <Ellipse.Fill>
-                                    <SolidColorBrush Color='Blue'/>
+                                    <SolidColorBrush Color='Green'/>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
@@ -104,7 +104,7 @@
                     FontSize="14" 
                    />
 
-                            <TextBox Name="Time" />
+                            <TextBox Name="Time"  IsReadOnly="True" />
                         </Grid>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="5" Margin="20 10">
@@ -156,12 +156,12 @@
                     FontSize="14" 
                    />
 
-                            <TextBox Name="LinkToFile"/>
+                            <TextBox Name="LinkToFile" IsReadOnly="True" />
                         </Grid>
                     </StackPanel>
                     <Button Margin="20 0 0 0" Grid.Column="1" Grid.Row="5" Content="Choose File" Name="chooseFileButton" HorizontalAlignment="Left"  Style="{StaticResource mainButton}" Click="chooseFileButton_Click">
                         <Button.Effect>
-                            <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="#4880FF"/>
+                            <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="Green"/>
                         </Button.Effect>
                     </Button>
                     <!--Form Bottom Background-->
@@ -170,7 +170,7 @@
                     <!--Main Button-->
                     <Button Grid.Column="1" Name="addSong" Grid.Row="6" Content="Add" HorizontalAlignment="Right" Margin="0 40 20 0" Style="{StaticResource mainButton}" Click="addSong_Click">
                         <Button.Effect>
-                            <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="#4880FF"/>
+                            <DropShadowEffect Direction="-120" BlurRadius="10" Opacity="0.3" ShadowDepth="5" Color="Green"/>
                         </Button.Effect>
                     </Button>
 

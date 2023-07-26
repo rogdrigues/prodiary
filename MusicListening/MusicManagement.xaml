@@ -6,14 +6,14 @@
       xmlns:local="clr-namespace:ProDiaryApplication.MusicListening"
       xmlns:uc="clr-namespace:ProDiaryApplication.UserControls"
       Background="Transparent"
-      Height="660"
+      Height="960"
       Width="1434"         
       Title="MusicManagement">
 
     <Border Background="White"  MouseDown="Border_MouseDown" >
-        
-        <Grid>
-            
+
+        <Grid Margin="0,0,0,-175">
+
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="220"/>
@@ -27,7 +27,7 @@
                 <RowDefinition Height="181"/>
 
             </Grid.RowDefinitions>
-            <Border Background="White" CornerRadius="40 0 0 40" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="0,0,572,0">
+            <Border Background="White" CornerRadius="40 0 0 40" Grid.ColumnSpan="2" Margin="0,0,572,0">
                 <StackPanel Margin="0,0,0,0" HorizontalAlignment="Left" Width="247">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="63">
                         <Ellipse Fill="#ff6258" Width="10" Height="10"></Ellipse>
@@ -42,9 +42,15 @@
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}" Visibility="Visible"  Kind="AccountArrowRight"/>
                         </Grid>
                     </Button>
+                    <Button Name="AddPlayList" Style="{StaticResource menuButton}" Click="AddPlayList_Click">
+                        <Grid>
+                            <TextBlock Text="Add PlayList" Margin="0 0 0 2"></TextBlock>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"  Kind="AccountArrowRight"/>
+                        </Grid>
+                    </Button>
                     <Button Style="{StaticResource menuButton}">
                         <Grid>
-                            <TextBlock Text="Playlists" Margin="0 0 0 2"></TextBlock>
+                            <TextBlock Text="Edit PlayList" Margin="0 0 0 2"></TextBlock>
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"  Kind="AccountArrowRight"/>
                         </Grid>
                     </Button>
@@ -70,7 +76,7 @@
                     </Button>
                 </StackPanel>
             </Border>
-            
+
             <StackPanel Grid.Column="1" Background="White" Margin="40 50 10 0" >
                 <TextBlock Text="Home" Style="{StaticResource titleText}" />
                 <Border CornerRadius="20" Margin="0 20 0 0">
@@ -137,26 +143,14 @@
                     </Grid>
                 </Border>
             </StackPanel>
-            
+
             <Border Grid.Column="2" CornerRadius="0 40 0 0" Background="White" Margin="0,22,0,0">
-                
-                <StackPanel Margin="30 0 30 0">
-                    <Button x:Name="CloseButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"
-                Panel.ZIndex="1" Click="CloseButton_Click">
-                        <!-- Set a higher ZIndex value for the button -->
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <!-- Replace 'YourCloseButtonIcon' with the desired icon for the close button -->
-                                    <Icon:PackIconMaterial Kind="Close" Foreground="Black" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+
+                <StackPanel Margin="30 30 30 0">
                     <TextBlock Text="Artists" Style="{StaticResource titleText}" Margin="0 0 0 10" FontSize="28"/>
                     <ListBox Name="artistsList" ItemsSource="{Binding artistsList}" Style="{StaticResource {x:Type ListBox}}" SelectionChanged="ListBoxArtists_SelectionChanged">
                         <ListBox.ItemTemplate >
-                        <DataTemplate>
+                            <DataTemplate>
                                 <Border x:Name="border" CornerRadius="30" Padding="10" Margin="0 7">
                                     <Border.Style>
                                         <Style TargetType="Border">
@@ -181,7 +175,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Ellipse Width="40" Height="40" Margin="0 0 20 0">
                                             <Ellipse.Fill>
-                                                <SolidColorBrush Color='Red'/>
+                                                <ImageBrush ImageSource='https://yt3.googleusercontent.com/mm2-5anuZ6ghmK2zL6QM7wciD6kuupOfOagiAh5vZE1hx9tRhKEXTAExZUUY4PVq2RSw9jBpBQ=s900-c-k-c0x00ffffff-no-rj'/>
                                             </Ellipse.Fill>
                                         </Ellipse>
                                         <TextBlock  Text="{Binding ID}" FontSize="16" FontWeight="SemiBold" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,12,0"/>
@@ -190,26 +184,23 @@
                                     </Grid>
                                 </Border>
                             </DataTemplate>
-                    </ListBox.ItemTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                     <TextBlock Text="PlayLists" Style="{StaticResource titleText}" Margin="0 30 0 20" FontSize="24"/>
                     <StackPanel Orientation="Horizontal">
-                        <ItemsControl Name="songSelectedItems" ItemsSource="{Binding songList}" >
-                            <ItemsControl.ItemTemplate>
+                        <ListBox Name="PlayListDisplay" ItemsSource="{Binding PlayLists}" Style="{StaticResource {x:Type ListBox}}" SelectionChanged="ListBoxPlaylist_SelectionChanged">
+                            <ListBox.ItemTemplate >
                                 <DataTemplate>
-                                    <Border x:Name="border" CornerRadius="30" Padding="10" Margin="0 7" MouseDown="Item_Click" >
+                                    <Border CornerRadius="30">
                                         <Border.Style>
                                             <Style TargetType="Border">
-                                                <Setter Property="Background" Value="#ecf4f0"/>
+                                                <Setter Property="Background" Value="Transparent"/>
                                                 <Style.Triggers>
-                                                    
-
                                                     <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="#03bf69"/>
+                                                        <Setter Property="Background" Value="#f1f1f1"/>
                                                     </Trigger>
-                                                    <DataTrigger Binding="{Binding ElementName=popularSong, Path=IsActive}" Value="True">
-                                                        <Setter Property="Background" Value="#03bf69"/>
-
+                                                    <DataTrigger Binding="{Binding IsClicked}" Value="True">
+                                                        <Setter Property="Background" Value="#f1f1f1"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
 
@@ -218,33 +209,32 @@
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="180"/>
-
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Ellipse Width="40" Height="40" Margin="0 0 20 0">
+                                            <Ellipse Width="60" Height="60">
                                                 <Ellipse.Fill>
-                                                    <SolidColorBrush Color='Red'/>
+                                                    <ImageBrush ImageSource='https://static.vecteezy.com/system/resources/thumbnails/002/869/642/small/listening-to-music-black-glyph-icon-headphones-with-playing-song-hear-audio-in-headset-everyday-entertainment-and-daily-activities-silhouette-symbol-on-white-space-isolated-illustration-vector.jpg'/>
                                                 </Ellipse.Fill>
                                             </Ellipse>
-                                            <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                                            <TextBlock Text="{Binding Time}" FontSize="14" FontWeight="SemiBold" Grid.Column="1" VerticalAlignment="Center" Margin="120,0,0,0" HorizontalAlignment="Left" Width="60"/>
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="15 0 40 0">
+                                                <TextBlock Text="{Binding PlayListName}" FontSize="20" FontWeight="Bold" Foreground="#999999"/>
 
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
                     </StackPanel>
                 </StackPanel>
 
             </Border>
-            <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Margin="63,91,0,0">
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Background="#03bf69" CornerRadius="40 0 40 0" Margin="63,848,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Ellipse Width="60" Height="60" Margin="30 0 0 0">
                         <Ellipse.Fill>
-                            <ImageBrush/>
+                            <ImageBrush ImageSource='https://static.vecteezy.com/system/resources/thumbnails/002/869/642/small/listening-to-music-black-glyph-icon-headphones-with-playing-song-hear-audio-in-headset-everyday-entertainment-and-daily-activities-silhouette-symbol-on-white-space-isolated-illustration-vector.jpg'/>
                         </Ellipse.Fill>
                     </Ellipse>
                     <StackPanel VerticalAlignment="Center" Margin="20 0 30 0">
@@ -256,14 +246,14 @@
                         <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource playerButtonIcon}"/>
                     </Button>
                     <Grid>
-                        
+
                         <!-- Your existing button for pausing the music -->
                         <Button Style="{StaticResource playButton}" Click="Button_Click">
                             <Icon:PackIconMaterial Kind="Pause" Style="{StaticResource playerButtonIcon}"  x:Name="pauseBtn" />
                         </Button>
 
                         <!-- Your existing button for playing the music -->
-                        
+
                     </Grid>
                     <Button Style="{StaticResource playButton}" Click="Button_Click_1">
                         <Icon:PackIconMaterial Kind="Play" Style="{StaticResource playerButtonIcon}" Visibility="Collapsed" x:Name="playBtn" />

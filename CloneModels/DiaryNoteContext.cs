@@ -97,8 +97,6 @@ namespace ProDiaryApplication.CloneModels
 
             modelBuilder.Entity<PlayList>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("PlayList");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -108,8 +106,6 @@ namespace ProDiaryApplication.CloneModels
 
             modelBuilder.Entity<PlayListSong>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("PlayListSong");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -117,6 +113,18 @@ namespace ProDiaryApplication.CloneModels
                 entity.Property(e => e.PlayListId).HasColumnName("PlayListID");
 
                 entity.Property(e => e.SongId).HasColumnName("SongID");
+
+                entity.HasOne(d => d.PlayList)
+                    .WithMany(p => p.PlayListSongs)
+                    .HasForeignKey(d => d.PlayListId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PlayListSong_PlayList");
+
+                entity.HasOne(d => d.Song)
+                    .WithMany(p => p.PlayListSongs)
+                    .HasForeignKey(d => d.SongId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PlayListSong_Song");
             });
 
             modelBuilder.Entity<Singer>(entity =>

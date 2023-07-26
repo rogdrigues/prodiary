@@ -9,5 +9,8 @@ namespace ProDiaryApplication.CloneModels
         public int SongId { get; set; }
         public int PlayListId { get; set; }
         public int? Status { get; set; }
+
+        public virtual PlayList PlayList { get; set; } = null!;
+        public virtual Song Song { get; set; } = null!;
     }
 }

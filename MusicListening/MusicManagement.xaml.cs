@@ -33,14 +33,19 @@ namespace ProDiaryApplication.MusicListening
             var context = new CloneModels.DiaryNoteContext();
             foreach (var item in context.Songs.Include(e => e.AuthorNavigation))
             {
-                songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl }); ;
+                songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl, Category = item.Category, Status = item.Status, AuthorID = Convert.ToInt32(item.Author) }); ;
             }
             foreach (var item in context.Singers)
             {
                 singerList.Add(new DisplaySinger { ID = item.Id+"", Name = item.SingerName, IsClicked = false });
             }
+            foreach (var item in context.PlayLists)
+            {
+                PlayLists.Add(new DisplayPlayList { Id = item.Id, PlayListName = item.PlayListName, Owner = item.Owner, IsClicked = false });
+            }
             CurrentUser = User;
             InitializeComponent();
+            PlayListDisplay.ItemsSource = PlayLists;
             artistsList.ItemsSource = singerList;
             songListItems.ItemsSource = songList;
             songTimeSlider.ValueChanged += SongTimeSlider_ValueChanged;
@@ -55,9 +60,13 @@ namespace ProDiaryApplication.MusicListening
             }
         }
         List<DisplaySong> songList = new List<DisplaySong>();
+        List<DisplayPlayList> PlayLists = new List<DisplayPlayList>();
+
         List<DisplaySinger> singerList = new List<DisplaySinger>();
         Models.Account CurrentUser = new Models.Account();
         DisplaySong currentSong = new DisplaySong();
+        DisplayPlayList currentPlayList = new DisplayPlayList();
+
         private int currentSongIndex = -1; // Initialize to -1 to indicate no song is currently playing
 
         private void SongItem_Loaded(object sender, RoutedEventArgs e)
@@ -84,7 +93,7 @@ namespace ProDiaryApplication.MusicListening
                     {
                         item.IsClicked = (item.ID == selectedItem.ID); // Set IsClicked to true only for the selected item
                     }
-
+                    
                     // Refresh the ListBox to reflect the updated IsClicked values
                     songListItems.Items.Refresh();
 
@@ -134,6 +143,44 @@ namespace ProDiaryApplication.MusicListening
                 }
             }
         }
+        private void ListBoxPlaylist_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PlayListDisplay.SelectedItem is DisplayPlayList selectedItem)
+            {
+                try
+                {
+                    var selectedPlayList = (DisplayPlayList)PlayListDisplay.SelectedItem;
+                    foreach (var item in PlayLists)
+                    {
+                        item.IsClicked = (item.Id == selectedItem.Id); // Set IsClicked to true only for the selected item
+                    }
+
+                    foreach (var item in singerList)
+                    {
+                        item.IsClicked = false; // Set IsClicked to true only for the selected item
+                    }
+                    artistsList.Items.Refresh();
+                    currentPlayList = selectedPlayList;
+                    PlayListDisplay.Items.Refresh();
+                    songList = new List<DisplaySong>();
+                    var context = new CloneModels.DiaryNoteContext();
+                    List<PlayListSong> playListSong = context.PlayListSongs.Where(x => x.PlayListId == selectedPlayList.Id).ToList();
+                    foreach (var item in playListSong)
+                    {
+                        Song a = context.Songs.Include(e => e.AuthorNavigation).FirstOrDefault(x => x.Id == item.SongId);
+                        songList.Add(new DisplaySong { Author = a.AuthorNavigation.SingerName, Title = a.Title, Time = a.Time, LinkToFile = a.LinkToFile, ID = a.Id + "", IsClicked = false, Owner = a.Owner, ImageURL = a.ImageUrl, Category = a.Category, Status = a.Status, AuthorID = Convert.ToInt32(a.Author) }); ;
+                    }
+                    songListItems.ItemsSource = songList;
+                    ArtistsName.Text = "PlayList " + selectedPlayList.PlayListName;
+                    songListItems.Items.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception
+                    MessageBox.Show($"An error occurred while playing the audio:\n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
         private void ListBoxArtists_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (artistsList.SelectedItem is DisplaySinger selectedItem)
@@ -145,6 +192,11 @@ namespace ProDiaryApplication.MusicListening
                     {
                         item.IsClicked = (item.ID == selectedItem.ID); // Set IsClicked to true only for the selected item
                     }
+                    foreach (var item in PlayLists)
+                    {
+                        item.IsClicked = false; // Set IsClicked to true only for the selected item
+                    }
+                    PlayListDisplay.Items.Refresh();
 
                     // Refresh the ListBox to reflect the updated IsClicked values
                     artistsList.Items.Refresh();
@@ -153,7 +205,7 @@ namespace ProDiaryApplication.MusicListening
 
                     foreach (var item in context.Songs.Where(s => s.Author+"" == selectedItem.ID).Include(e => e.AuthorNavigation))
                     {
-                        songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false  , Owner = item.Owner, ImageURL = item.ImageUrl }); ;
+                        songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false  , Owner = item.Owner, ImageURL = item.ImageUrl, Category = item.Category, Status = item.Status, AuthorID = Convert.ToInt32(item.Author) }); ;
                     }
                     songListItems.ItemsSource = songList;
                     ArtistsName.Text = selectedSinger.Name;
@@ -347,7 +399,7 @@ namespace ProDiaryApplication.MusicListening
 
                 foreach (var item in context.Songs.Where(s => s.Owner == CurrentUser.Id).Include(e => e.AuthorNavigation))
                 {
-                    songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl }); ;
+                    songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl, Category = item.Category, Status = item.Status, AuthorID = Convert.ToInt32(item.Author) }); ;
                 }
                 foreach (var item in singerList)
                 {
@@ -378,7 +430,7 @@ namespace ProDiaryApplication.MusicListening
 
             foreach (var item in context.Songs.Include(e => e.AuthorNavigation))
             {
-                songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl }); ;
+                songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl, Category = item.Category, Status = item.Status, AuthorID = Convert.ToInt32(item.Author) }); ;
             }
             foreach (var item in singerList)
             {
@@ -394,15 +446,18 @@ namespace ProDiaryApplication.MusicListening
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            var addSongDialog = new AddSongDialog(CurrentUser);
-            if(currentSong.Owner == CurrentUser.Id)
+            var addSongDialog = new AddSongDialog(CurrentUser, currentSong.Title, currentSong.Time, currentSong.ImageURL, currentSong.LinkToFile, Convert.ToInt32(currentSong.ID), currentSong.Category, Convert.ToInt32(currentSong.Status), Convert.ToInt32(currentSong.AuthorID));
+            if (currentSong.Owner == CurrentUser.Id)
             {
-                addSongDialog.Time.Text = currentSong.Time.ToString();
-                addSongDialog.Title.Text = currentSong.Title.ToString();
-                addSongDialog.ImageURL.Text = currentSong.ImageURL.ToString();
-                addSongDialog.LinkToFile.Text = currentSong.LinkToFile.ToString();
-                addSongDialog.ID = Convert.ToInt32(currentSong.ID);
+                
+                    addSongDialog.Time.Text = currentSong.Time.ToString();
+                    addSongDialog.Title.Text = currentSong.Title.ToString();
+                    addSongDialog.ImageURL.Text = currentSong.ImageURL.ToString();
+                    addSongDialog.LinkToFile.Text = currentSong.LinkToFile.ToString();
+                    addSongDialog.ID = Convert.ToInt32(currentSong.ID);
+                
                 addSongDialog.addSong.Content = "Update Song";
+
             }
             addSongDialog.ShowDialog();
 
@@ -411,6 +466,43 @@ namespace ProDiaryApplication.MusicListening
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        public void ReloadData()
+        {
+            var context = new CloneModels.DiaryNoteContext();
+            songList.Clear();
+            foreach (var item in context.Songs.Include(e => e.AuthorNavigation))
+            {
+                songList.Add(new DisplaySong { Author = item.AuthorNavigation.SingerName, Title = item.Title, Time = item.Time, LinkToFile = item.LinkToFile, ID = item.Id + "", IsClicked = false, Owner = item.Owner, ImageURL = item.ImageUrl, Category = item.Category, Status = item.Status, AuthorID = Convert.ToInt32(item.Author) });
+            }
+
+            singerList.Clear();
+            foreach (var item in context.Singers)
+            {
+                singerList.Add(new DisplaySinger { ID = item.Id + "", Name = item.SingerName, IsClicked = false });
+            }
+            PlayLists.Clear();
+            foreach (var item in context.PlayLists)
+            {
+                PlayLists.Add(new DisplayPlayList { Id = item.Id, PlayListName = item.PlayListName, IsClicked = false });
+            }
+            songListItems.ItemsSource = null;
+            songListItems.ItemsSource = songList;
+            artistsList.ItemsSource = null;
+            artistsList.ItemsSource = singerList;
+            PlayListDisplay.ItemsSource = null;
+            PlayListDisplay.ItemsSource = PlayLists;
+        }
+
+        private void AddPlayList_Click(object sender, RoutedEventArgs e)
+        {
+            var addPlayListDialog = new AddPlayList(CurrentUser);
+            if (currentPlayList.Owner == CurrentUser.Id)
+            {
+
+            }
+            addPlayListDialog.ShowDialog();
+
         }
     }
 }
