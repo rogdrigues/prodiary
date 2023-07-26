@@ -58,7 +58,7 @@ namespace ProDiaryApplication.MenuItem
                 itemList.Add(new Item
                 {
                     Title = task.TaskTitle,
-                    Time = DateTime.Parse(task.TaskBegin.ToString()).ToString("HH:MM") + " - " + DateTime.Parse(task.TaskEnd.ToString()).ToString("HH:MM"),
+                    Time = DateTime.Parse(task.TaskBegin.ToString()).ToString("HH:mm") + " - " + DateTime.Parse(task.TaskEnd.ToString()).ToString("HH:mm"),
                     Color = "#EBA5BB",
                     Icon = "CheckCircle",
                     IconBell = "BellSlash"
