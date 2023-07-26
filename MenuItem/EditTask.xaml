@@ -12,7 +12,7 @@
 
 
         <TextBlock Text="Task Title:" Foreground="#FFFFFF" Grid.Row="1" Grid.RowSpan="5" Canvas.Left="20" Canvas.Top="59" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <TextBlock Text="UPDATE TASK"  Grid.Row="1" Grid.RowSpan="5" Canvas.Left="193" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="173" FontSize="25" FontWeight="Bold" Foreground="Yellow"/>
+        <TextBlock Text="TASK DETAIL"  Grid.Row="1" Grid.RowSpan="5" Canvas.Left="193" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="173" FontSize="25" FontWeight="Bold" Foreground="Yellow"/>
         <TextBox x:Name="txtTaskTitle" Grid.Row="1" Width="208" HorizontalAlignment="Center" Canvas.Left="214" Height="34" Canvas.Top="58" Background="White"/>
 
         <TextBlock Text="Content" Foreground="#FFFFFF" Grid.Row="5" Canvas.Left="20" Canvas.Top="107" HorizontalAlignment="Left" VerticalAlignment="Top" />
